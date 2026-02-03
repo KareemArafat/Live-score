@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Background image fills the whole screen -->
+    <item>
+        <bitmap
+            android:gravity="fill"
+            android:src="@drawable/splash_bg" />
+    </item>
+
+    <!-- Optional logo centered -->
+    <item>
+        <bitmap
+            android:gravity="center"
+            android:src="@drawable/splash_logo" />
+    </item>
+
+</layer-list>
+

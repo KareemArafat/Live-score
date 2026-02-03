@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="LaunchTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <!-- Background image -->
+    <item name="android:windowBackground">@drawable/splash_screen</item>
+
+    <!-- Transparent status bar so background shows through -->
+    <item name="android:statusBarColor">@android:color/transparent</item>
+
+    <!-- Keep status bar visible -->
+    <item name="android:windowFullscreen">false</item>
+
+    <!-- Light or dark icons on status bar (optional) -->
+    <item name="android:windowLightStatusBar">false</item> <!-- dark icons -->
+    </style>
+
+
+
+    <style name="NormalTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar"/>
+
+</resources>
+
