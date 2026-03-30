@@ -1,6 +1,6 @@
 import 'package:live_score_app/core/api/api_const.dart';
 import 'package:live_score_app/core/utils/functions.dart';
-import 'package:live_score_app/features/leagues/domain/entities/league_entity.dart';
+import 'package:live_score_app/shard/entities/league_entity.dart';
 
 class LeagueModel extends LeagueEntity {
   LeagueModel({

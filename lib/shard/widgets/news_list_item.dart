@@ -41,7 +41,7 @@ class NewsListItem extends StatelessWidget {
           ),
           SizedBox(height: 10),
           InkWell(
-            onTap: () => openUrl(newsUrl: news.url),
+            onTap: () => openUrl(url: news.url),
             child: Text(
               news.title,
               style: AppStyles.heading16.copyWith(

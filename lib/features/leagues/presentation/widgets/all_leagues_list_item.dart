@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:live_score_app/core/theme/app_styles.dart';
 import 'package:live_score_app/core/utils/app_routers.dart';
 import 'package:live_score_app/core/widgets/custom_network_image.dart';
-import 'package:live_score_app/features/leagues/domain/entities/league_entity.dart';
+import 'package:live_score_app/shard/entities/league_entity.dart';
 
 class AllLeaguesListItem extends StatelessWidget {
   const AllLeaguesListItem({super.key, required this.leagueEntity});

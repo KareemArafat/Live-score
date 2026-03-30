@@ -58,8 +58,14 @@ class _MatchLineupTabBarState extends State<MatchLineupTabBar>
               controller: _tabController,
               physics: NeverScrollableScrollPhysics(),
               children: [
-                LineupTabBarView(lineup: state.matchDetails.homeLineUp!),
-                LineupTabBarView(lineup: state.matchDetails.awayLineUp!),
+                LineupTabBarView(
+                  lineup: state.matchDetails.homeLineUp!,
+                  events: state.matchDetails.events,
+                ),
+                LineupTabBarView(
+                  lineup: state.matchDetails.awayLineUp!,
+                  events: state.matchDetails.events,
+                ),
               ],
             );
           } else if (state is MatchDetailsFailure) {

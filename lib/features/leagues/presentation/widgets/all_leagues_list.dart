@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:live_score_app/core/widgets/custom_error_widget.dart';
 import 'package:live_score_app/core/widgets/custom_loading_widget.dart';
-import 'package:live_score_app/features/leagues/domain/entities/league_entity.dart';
+import 'package:live_score_app/shard/entities/league_entity.dart';
 import 'package:live_score_app/features/leagues/presentation/manager/all_leagues_cubit/all_leagues_cubit.dart';
 import 'package:live_score_app/features/leagues/presentation/widgets/all_leagues_list_item.dart';
 

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:live_score_app/shard/widgets/home_app_bar.dart';
 import 'package:live_score_app/features/leagues/presentation/manager/all_leagues_cubit/all_leagues_cubit.dart';
 import 'package:live_score_app/features/leagues/presentation/widgets/all_leagues_list.dart';
 
@@ -20,12 +19,6 @@ class _AllLeaguesPageBodyState extends State<AllLeaguesPageBody> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        HomeAppBar(),
-        SizedBox(height: 5),
-        Expanded(child: AllLeaguesList()),
-      ],
-    );
+    return Column(children: [Expanded(child: AllLeaguesList())]);
   }
 }

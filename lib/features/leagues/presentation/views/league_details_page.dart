@@ -1,12 +1,13 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:live_score_app/core/utils/service_locator.dart';
 import 'package:live_score_app/features/leagues/domain/use_cases/get_league_news_use_case.dart';
 import 'package:live_score_app/features/leagues/domain/use_cases/get_more_league_matches_use_case.dart';
 import 'package:live_score_app/features/leagues/presentation/manager/league_news_cubit/league_news_cubit.dart';
-import 'package:live_score_app/core/widgets/custom_app_bar.dart';
 import 'package:live_score_app/core/widgets/custom_scaffold.dart';
-import 'package:live_score_app/features/leagues/domain/entities/league_entity.dart';
+import 'package:live_score_app/features/search/presentation/widgets/search_field.dart';
+import 'package:live_score_app/shard/entities/league_entity.dart';
 import 'package:live_score_app/features/leagues/domain/use_cases/get_league_matches_use_case.dart';
 import 'package:live_score_app/features/leagues/domain/use_cases/get_league_table_use_case.dart';
 import 'package:live_score_app/features/leagues/domain/use_cases/get_league_players_stats_use_case.dart';
@@ -48,9 +49,12 @@ class LeagueDetailsPage extends StatelessWidget {
       child: ChangeNotifierProvider(
         create: (context) => LeagueEntityProvider(league),
         child: CustomScaffold(
+          appBar: AppBar(
+            backgroundColor: Colors.transparent,
+            title: SearchField(),
+          ),
           body: Column(
             children: [
-              CustomAppBar(),
               LeaguePageTitle(),
               Expanded(child: LeagueTapBar()),
             ],

@@ -39,7 +39,7 @@ class TableItem extends StatelessWidget {
               ),
             ),
             SizedBox(width: 10),
-            CustomNetworkImage(imageUrl: teamRow.team!.teamLogo, size: 15),
+            CustomNetworkImage(imageUrl: teamRow.team!.teamImage, size: 15),
             SizedBox(width: 5),
             SizedBox(
               width: 100,

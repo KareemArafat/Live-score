@@ -4,10 +4,12 @@ import 'package:live_score_app/core/theme/app_colors.dart';
 import 'package:live_score_app/core/theme/app_images.dart';
 import 'package:live_score_app/core/widgets/custom_gradient_widget.dart';
 import 'package:live_score_app/core/widgets/custom_scaffold.dart';
-import 'package:live_score_app/features/day_matches/presentation/views/day_matches_page.dart';
-import 'package:live_score_app/features/fav_teams/presentation/manager/manage_fav_teams_cubit/manage_fav_teams_cubit.dart';
-import 'package:live_score_app/features/fav_teams/presentation/views/fav_page.dart';
+import 'package:live_score_app/features/day%20matches/presentation/views/day_matches_page.dart';
+import 'package:live_score_app/features/fav%20teams/presentation/manager/manage_fav_teams_cubit/manage_fav_teams_cubit.dart';
+import 'package:live_score_app/features/fav%20teams/presentation/views/fav_page.dart';
 import 'package:live_score_app/features/leagues/presentation/views/all_leagues_page.dart';
+import 'package:live_score_app/features/search/presentation/widgets/search_field.dart';
+import 'package:live_score_app/features/slider%20menu/presentation/views/slider_menu.dart';
 
 class PageNavigationBar extends StatefulWidget {
   const PageNavigationBar({super.key});
@@ -54,6 +56,13 @@ class _PageNavigationBarState extends State<PageNavigationBar> {
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
+      appBar: AppBar(
+        iconTheme: const IconThemeData(color: Colors.white),
+        scrolledUnderElevation: 0,
+        backgroundColor: Colors.transparent,
+        title: SearchField(),
+      ),
+      drawer: SliderMenu(),
       body: IndexedStack(
         index: currentIndex,
         children: _pagesList.map((p) => p ?? const SizedBox()).toList(),

@@ -53,7 +53,7 @@ class LeaguesRemoteDataSourceImpl extends LeaguesRemoteDataSource {
   @override
   Future<MatchesModel> getMoreLeagueMatches({required String pageUrl}) async {
     var response = await _apiServices.get(
-      endPoint: 'https://webws.365scores.com$pageUrl',
+      endPoint: ApiConst.leagueMoreMatchesEndPoint(pageUrl),
     );
     return MatchesModel.fromJson(response);
   }

@@ -26,4 +26,16 @@ class AppImages {
   static const score = 'assets/icons/score.png';
   static const assist = 'assets/icons/assist.png';
   static const crossbar = 'assets/icons/crossbar.png';
+
+  static const gmail = 'assets/icons/gmail.png';
+  static const whatsapp = 'assets/icons/whatsapp.png';
+
+  static const user1 = 'assets/users/user1.png';
+  static const user2 = 'assets/users/user2.png';
+  static const user3 = 'assets/users/user3.png';
+  static const user4 = 'assets/users/user4.png';
+  static const user5 = 'assets/users/user5.png';
+  static const user6 = 'assets/users/user6.png';
+  static const user7 = 'assets/users/user7.png';
+  static const user8 = 'assets/users/user8.png';
 }

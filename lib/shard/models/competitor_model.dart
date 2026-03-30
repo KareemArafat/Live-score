@@ -31,10 +31,10 @@ class CompetitorModel extends TeamEntity {
   }) : super(
          teamId: id ?? 0,
          teamName: name ?? 'Unknown Team',
-         teamLogo: ApiConst.teamImage(id ?? 0),
+         teamImage: ApiConst.teamImage(id ?? 0),
          countryId: competitorCountryId ?? 0,
          countryName: getCountryName(competitorCountryId ?? 0),
-         countryFlag: '',
+         countryImage: '',
          leagueId: mainCompetitionId ?? 0,
        );
 

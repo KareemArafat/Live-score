@@ -11,7 +11,7 @@ class LineupMemberEntity {
   final String positionName;
   final int line;
   final double linePosition;
-  final bool isSub;
+  final bool isBench;
   final List<LineupMemberStatsEntity> memberStats;
 
   LineupMemberEntity({
@@ -27,9 +27,16 @@ class LineupMemberEntity {
     required this.positionName,
     required this.line,
     required this.linePosition,
-    required this.isSub,
+    required this.isBench,
     required this.memberStats,
   });
+
+  int getStat(String name) {
+    for (final stat in memberStats) {
+      if (stat.statName == name) return int.parse(stat.statValue);
+    }
+    return 0;
+  }
 }
 
 class LineupMemberStatsEntity {

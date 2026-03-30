@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:live_score_app/core/theme/app_colors.dart';
 import 'package:live_score_app/core/theme/app_styles.dart';
+import 'package:live_score_app/features/matches/domain/entities/match_details_entity/events_entity.dart';
 import 'package:live_score_app/features/matches/domain/entities/match_details_entity/lineup_entity.dart';
 import 'package:live_score_app/features/matches/presentation/widgets/lineup_bench.dart';
 import 'package:live_score_app/features/matches/presentation/widgets/lineup_field.dart';
 import 'package:live_score_app/shard/widgets/player_image.dart';
 
 class LineupTabBarView extends StatelessWidget {
-  const LineupTabBarView({super.key, required this.lineup});
+  const LineupTabBarView({
+    super.key,
+    required this.lineup,
+    required this.events,
+  });
   final LineupEntity lineup;
+  final List<EventsEntity> events;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +34,7 @@ class LineupTabBarView extends StatelessWidget {
                   child: Text(lineup.lineupStatus, style: AppStyles.body12),
                 ),
               ),
-              LineupField(lineup: lineup),
+              LineupField(lineup: lineup, events: events),
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                 decoration: BoxDecoration(
@@ -67,7 +73,7 @@ class LineupTabBarView extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 8),
-              LineupBench(lineup: lineup),
+              LineupBench(lineup: lineup, events: events),
             ]),
           ),
         ),

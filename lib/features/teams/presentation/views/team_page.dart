@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:live_score_app/core/utils/service_locator.dart';
+import 'package:live_score_app/features/search/presentation/widgets/search_field.dart';
 import 'package:live_score_app/features/teams/domain/use_cases/get_more_team_matches_use_case.dart';
 import 'package:live_score_app/features/teams/domain/use_cases/get_team_news_use_case.dart';
 import 'package:live_score_app/features/teams/presentation/manager/team_news_cubit/team_news_cubit.dart';
 import 'package:live_score_app/shard/entities/team_entity.dart';
-import 'package:live_score_app/core/widgets/custom_app_bar.dart';
 import 'package:live_score_app/core/widgets/custom_scaffold.dart';
 import 'package:live_score_app/features/teams/domain/use_cases/get_team_matches_use_case.dart';
 import 'package:live_score_app/features/teams/domain/use_cases/get_team_squad_use_case.dart';
@@ -42,12 +42,15 @@ class TeamPage extends StatelessWidget {
         ),
       ],
       child: CustomScaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          title: SearchField(),
+        ),
         body: Column(
           children: [
-            CustomAppBar(),
             TeamPageTitle(team: team),
             Expanded(
-              child: TeamTabBar(teamId: team.teamId, leagueId: team.leagueId),
+              child: TeamTabBar(teamId: team.teamId, leagueId: team.leagueId!),
             ),
           ],
         ),

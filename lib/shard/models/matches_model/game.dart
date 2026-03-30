@@ -1,5 +1,5 @@
 import 'package:live_score_app/core/api/api_const.dart';
-import 'package:live_score_app/features/leagues/domain/entities/league_entity.dart';
+import 'package:live_score_app/shard/entities/league_entity.dart';
 import 'package:live_score_app/shard/entities/match_entity.dart';
 import 'away_competitor.dart';
 import 'home_competitor.dart';

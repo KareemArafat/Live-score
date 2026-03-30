@@ -1,14 +1,14 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:live_score_app/core/api/api_service.dart';
-import 'package:live_score_app/features/day_matches/data/data_source/day_matches_remote_data_source.dart';
-import 'package:live_score_app/features/day_matches/data/repos/day_matches_repo_impl.dart';
-import 'package:live_score_app/features/day_matches/domain/repos/day_matches_repo.dart';
-import 'package:live_score_app/features/day_matches/domain/use_cases/get_all_matches_use_case.dart';
-import 'package:live_score_app/features/day_matches/domain/use_cases/get_fav_matches_use_case.dart';
-import 'package:live_score_app/features/fav_teams/data/data_source/fav_teams_local_data_source.dart';
-import 'package:live_score_app/features/fav_teams/data/repos/fav_teams_repo_impl.dart';
-import 'package:live_score_app/features/fav_teams/domain/repos/fav_teams_repo.dart';
+import 'package:live_score_app/features/day%20matches/data/data_source/day_matches_remote_data_source.dart';
+import 'package:live_score_app/features/day%20matches/data/repos/day_matches_repo_impl.dart';
+import 'package:live_score_app/features/day%20matches/domain/repos/day_matches_repo.dart';
+import 'package:live_score_app/features/day%20matches/domain/use_cases/get_all_matches_use_case.dart';
+import 'package:live_score_app/features/day%20matches/domain/use_cases/get_fav_matches_use_case.dart';
+import 'package:live_score_app/features/fav%20teams/data/data_source/fav_teams_local_data_source.dart';
+import 'package:live_score_app/features/fav%20teams/data/repos/fav_teams_repo_impl.dart';
+import 'package:live_score_app/features/fav%20teams/domain/repos/fav_teams_repo.dart';
 import 'package:live_score_app/features/leagues/data/data_sources/leagues_remote_data_source.dart';
 import 'package:live_score_app/features/leagues/data/repos/leagues_repo_impl.dart';
 import 'package:live_score_app/features/leagues/domain/repos/leagues_repo.dart';
@@ -23,6 +23,14 @@ import 'package:live_score_app/features/matches/data/repos/match_details_repo_im
 import 'package:live_score_app/features/matches/domain/repos/match_details_repo.dart';
 import 'package:live_score_app/features/matches/domain/use_cases/get_match_details_use_case.dart';
 import 'package:live_score_app/features/matches/domain/use_cases/get_match_stats_use_case.dart';
+import 'package:live_score_app/features/profile/data/data%20source/profile_local_data_source.dart';
+import 'package:live_score_app/features/profile/data/repos/profile_repo_imp.dart';
+import 'package:live_score_app/features/profile/domain/repos/profile_repo.dart';
+import 'package:live_score_app/features/profile/domain/use%20cases/create_user_use_case.dart';
+import 'package:live_score_app/features/search/data/data%20sources/search_remote_data_source.dart';
+import 'package:live_score_app/features/search/data/repos/search_repo_impl.dart';
+import 'package:live_score_app/features/search/domain/repos/search_repo.dart';
+import 'package:live_score_app/features/search/domain/use_cases/search_use_case.dart';
 import 'package:live_score_app/features/teams/data/data_sources/team_remote_data_source.dart';
 import 'package:live_score_app/features/teams/data/repos/team_repo_impl.dart';
 import 'package:live_score_app/features/teams/domain/repos/team_repo.dart';
@@ -54,6 +62,12 @@ void setupGetIt() {
   );
   getIt.registerSingleton<FavTeamsRepo>(
     FavTeamsRepoImpl(FavTeamsLocalDataSourceImpl()),
+  );
+  getIt.registerSingleton<SearchRepo>(
+    SearchRepoImpl(SearchRemoteDataSourceImpl(getIt<ApiServices>())),
+  );
+  getIt.registerSingleton<ProfileRepo>(
+    ProfileRepoImp(ProfileLocalDataSourceImp()),
   );
 
   // league use cases
@@ -107,5 +121,13 @@ void setupGetIt() {
   );
   getIt.registerSingleton<GetFavMatchesUseCase>(
     GetFavMatchesUseCase(getIt<DayMatchesRepo>()),
+  );
+
+  // search use cases
+  getIt.registerSingleton<SearchUseCase>(SearchUseCase(getIt<SearchRepo>()));
+
+  // profile use case
+  getIt.registerSingleton<CreateUserUseCase>(
+    CreateUserUseCase(getIt<ProfileRepo>()),
   );
 }

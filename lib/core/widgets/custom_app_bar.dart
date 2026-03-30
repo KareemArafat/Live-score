@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:live_score_app/core/widgets/custom_search_field.dart';
+import 'package:live_score_app/features/search/presentation/widgets/search_field.dart';
 
 class CustomAppBar extends StatelessWidget {
   const CustomAppBar({super.key});
@@ -14,7 +14,7 @@ class CustomAppBar extends StatelessWidget {
           icon: Icon(Icons.arrow_back),
         ),
         SizedBox(width: 10),
-        CustomSearchField(),
+        Expanded(child: SearchField()),
       ],
     );
   }

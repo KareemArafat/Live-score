@@ -6,22 +6,31 @@ class CustomScaffold extends StatelessWidget {
     super.key,
     required this.body,
     this.bottomNavigationBar,
+    this.appBar,
+    this.drawer,
   });
   final Widget body;
+  final Widget? drawer;
   final Widget? bottomNavigationBar;
+  final PreferredSizeWidget? appBar;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage(AppImages.background),
-          fit: BoxFit.fill,
+    return GestureDetector(
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      child: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage(AppImages.background),
+            fit: BoxFit.fill,
+          ),
         ),
-      ),
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        bottomNavigationBar: bottomNavigationBar,
-        body: SafeArea(child: body),
+        child: Scaffold(
+          backgroundColor: Colors.transparent,
+          bottomNavigationBar: bottomNavigationBar,
+          appBar: appBar,
+          drawer: drawer,
+          body: SafeArea(child: body),
+        ),
       ),
     );
   }

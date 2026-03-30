@@ -83,12 +83,12 @@ class CompetitorMember {
       playerName: members[id]?.playerName ?? '',
       playerImage: members[id]?.playerImage ?? '',
       playerNum: members[id]?.number ?? 0,
-      rate: ranking ?? 0,
+      rate: ranking ?? -1,
       hasStats: memberHasStats ?? false,
       positionName: position?.name ?? '',
       line: yardFormation?.line ?? 0,
       linePosition: yardFormation?.fieldSide?.toDouble() ?? 0,
-      isSub: statusText == 'Starting' ? false : true,
+      isBench: statusText == 'Starting' ? false : true,
       memberStats: stats,
     );
   }

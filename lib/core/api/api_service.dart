@@ -10,11 +10,13 @@ class ApiServices {
   Future<Map<String, dynamic>> get({
     required String endPoint,
     Map<String, dynamic>? queryParameters,
+    CancelToken? cancelToken,
   }) async {
     var response = await _dio.get(
       endPoint,
       queryParameters: queryParameters,
       options: Options(headers: ApiConst.headers),
+      cancelToken: cancelToken,
     );
     //   log(response.toString());
     return response.data;
