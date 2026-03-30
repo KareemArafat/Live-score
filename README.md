@@ -9,7 +9,7 @@ The app is built using **Clean Architecture** principles to ensure scalability, 
 ## 🚀 Features
 
 - 🔴 **Live Match Scores** (real-time updates)
-- 🕒 **Non-Live Match Results**
+- 🕒 **Live Match Results**
 - 🏟️ **Match Details**
   - Lineups
   - Match status
