@@ -9,7 +9,7 @@ The app is built using **Clean Architecture** principles to ensure scalability, 
 ## 🚀 Features
 
 - 🔴 **Live Match Scores** (real-time updates)
-- 🕒 **Non-Live Match Results**
+- 🕒 **Live Match Results**
 - 🏟️ **Match Details**
   - Lineups
   - Match status
@@ -41,5 +41,5 @@ The app is built using **Clean Architecture** principles to ensure scalability, 
 |---|---|---|---|---|
 | ![](assets/screen_shots/1.jpg) | ![](assets/screen_shots/2.jpg) | ![](assets/screen_shots/3.jpg) | ![](assets/screen_shots/4.jpg) | ![](assets/screen_shots/5.jpg) |
 | ![](assets/screen_shots/6.jpg) | ![](assets/screen_shots/7.jpg) | ![](assets/screen_shots/8.jpg) | ![](assets/screen_shots/9.jpg) | ![](assets/screen_shots/10.jpg) |
-| ![](assets/screen_shots/11.jpg) | ![](assets/screen_shots/12.jpg) | ![](assets/screen_shots/13.jpg) | ![](assets/screen_shots/14.jpg) | |
-
+| ![](assets/screen_shots/11.jpg) | ![](assets/screen_shots/12.jpg) | ![](assets/screen_shots/13.jpg) | ![](assets/screen_shots/14.jpg) | ![](assets/screen_shots/15.jpg) |
+| ![](assets/screen_shots/16.jpg) | ![](assets/screen_shots/17.jpg) | ![](assets/screen_shots/18.jpg) | ![](assets/screen_shots/20.jpg) | ![](assets/screen_shots/21.jpg) |
