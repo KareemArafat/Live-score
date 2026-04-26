@@ -35,8 +35,8 @@ class _LeagueTapBarState extends State<LeagueTapBar>
         TabBar(
           dividerColor: Colors.transparent,
           overlayColor: WidgetStateProperty.all(Colors.transparent),
-          unselectedLabelStyle: AppStyles.body14,
-          labelStyle: AppStyles.body14,
+          unselectedLabelStyle: AppStyles.body14(context),
+          labelStyle: AppStyles.body14(context),
           tabAlignment: TabAlignment.center,
           padding: const EdgeInsets.only(top: 20, bottom: 10),
           isScrollable: true,

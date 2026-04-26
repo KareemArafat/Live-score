@@ -29,7 +29,7 @@ class SupportButton extends StatelessWidget {
           SizedBox(width: 10),
           Text(
             '$text Support',
-            style: AppStyles.body14.copyWith(fontWeight: FontWeight.bold),
+            style: AppStyles.body14(context).copyWith(fontWeight: FontWeight.bold),
           ),
         ],
       ),

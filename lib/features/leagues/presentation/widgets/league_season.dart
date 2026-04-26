@@ -24,11 +24,11 @@ class _LeagueSeasonState extends State<LeagueSeason> {
     return DropdownButtonHideUnderline(
       child: DropdownButton2<SeasonEntity>(
         value: selectedSeason,
-        hint: Text('2025/2026', style: AppStyles.body12),
+        hint: Text('2025/2026', style: AppStyles.body12(context)),
         items: leagueProvider.seasons?.map((season) {
           return DropdownMenuItem<SeasonEntity>(
             value: season,
-            child: Text(season.name, style: AppStyles.body12),
+            child: Text(season.name, style: AppStyles.body12(context)),
           );
         }).toList(),
         onChanged: (value) {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:live_score_app/core/responsive_helpers/size_helper_extensions.dart';
 import 'package:live_score_app/core/theme/app_styles.dart';
 
 class SliderMenuItem extends StatelessWidget {
@@ -15,8 +16,8 @@ class SliderMenuItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: Icon(iconData, color: Colors.white),
-      title: Text(tittle, style: AppStyles.body14),
+      leading: Icon(iconData, color: Colors.white, size: context.r(20)),
+      title: Text(tittle, style: AppStyles.body14(context)),
       onTap: onTap,
     );
   }

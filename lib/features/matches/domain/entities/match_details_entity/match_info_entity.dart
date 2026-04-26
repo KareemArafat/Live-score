@@ -1,10 +1,10 @@
-class InfoEntity {
+class MatchInfoEntity {
   final String startTime;
   final String venueName;
   final int venueCapacity;
   final String officialName;
 
-  InfoEntity({
+  MatchInfoEntity({
     required this.startTime,
     required this.venueName,
     required this.venueCapacity,

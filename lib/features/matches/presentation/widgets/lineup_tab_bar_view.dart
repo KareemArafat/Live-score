@@ -31,7 +31,7 @@ class LineupTabBarView extends StatelessWidget {
                     borderRadius: BorderRadius.circular(12),
                     gradient: AppColors.blueGradient,
                   ),
-                  child: Text(lineup.lineupStatus, style: AppStyles.body12),
+                  child: Text(lineup.lineupStatus, style: AppStyles.body12(context)),
                 ),
               ),
               LineupField(lineup: lineup, events: events),
@@ -43,9 +43,9 @@ class LineupTabBarView extends StatelessWidget {
                 ),
                 child: Row(
                   children: [
-                    Text('Formation', style: AppStyles.body12),
+                    Text('Formation', style: AppStyles.body12(context)),
                     Spacer(),
-                    Text(lineup.lineupFormation, style: AppStyles.body12),
+                    Text(lineup.lineupFormation, style: AppStyles.body12(context)),
                   ],
                 ),
               ),
@@ -59,14 +59,14 @@ class LineupTabBarView extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Coach', style: AppStyles.heading16),
+                    Text('Coach', style: AppStyles.heading16(context)),
                     ListTile(
                       contentPadding: EdgeInsets.only(top: 10),
                       visualDensity: VisualDensity(vertical: -4),
                       leading: PlayerImage(image: lineup.coach.playerImage),
                       title: Text(
                         lineup.coach.playerName,
-                        style: AppStyles.body12,
+                        style: AppStyles.body12(context),
                       ),
                     ),
                   ],

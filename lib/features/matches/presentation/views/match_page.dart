@@ -16,6 +16,7 @@ class MatchPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(match.matchId);
     return CustomScaffold(
       body: MultiBlocProvider(
         providers: [

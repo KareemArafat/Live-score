@@ -25,7 +25,7 @@ class Athlete extends SquadPlayerEntity {
   }) : super(
          playerId: id ?? 0,
          playerName: name ?? 'UnKnown Player',
-         playerPhoto: ApiConst.playerImage(id ?? 0),
+         playerPhoto: ApiConst.playerTeamImage(id ?? 0),
          playerNumber: jerseyNum ?? 0,
          countryId: nationalityId ?? 0,
          countryName: getCountryName(nationalityId ?? 0),

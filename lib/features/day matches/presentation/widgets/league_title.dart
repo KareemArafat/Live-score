@@ -17,7 +17,7 @@ class LeagueTitle extends StatelessWidget {
       child: CustomGradientBorder(
         linearGradient: AppColors.blueGradient,
         border: 8,
-        widget: Padding(
+        child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 14),
           child: Row(
             children: [
@@ -26,7 +26,7 @@ class LeagueTitle extends StatelessWidget {
               Flexible(
                 child: Text(
                   leagueNameSplit(league.leagueName),
-                  style: AppStyles.heading16,
+                  style: AppStyles.heading16(context),
                 ),
               ),
             ],

@@ -19,7 +19,7 @@ class EventsItem extends StatelessWidget {
       child: Stack(
         alignment: Alignment.center,
         children: [
-          homeTeamId == event.teamId ? _homeTeamEvent() : _awayTeamEvent(),
+          homeTeamId == event.teamId ? _homeTeamEvent(context: context) : _awayTeamEvent(context: context),
           Container(
             height: 25,
             decoration: BoxDecoration(
@@ -27,7 +27,7 @@ class EventsItem extends StatelessWidget {
               gradient: AppColors.blueGradient,
             ),
             child: Center(
-              child: Text("${event.time}'", style: AppStyles.body10),
+              child: Text("${event.time}'", style: AppStyles.body10(context)),
             ),
           ),
         ],
@@ -35,7 +35,7 @@ class EventsItem extends StatelessWidget {
     );
   }
 
-  Widget _homeTeamEvent() {
+  Widget _homeTeamEvent({required BuildContext context}) {
     return Row(
       children: [
         Image.asset(_eventImage(), height: 18),
@@ -43,16 +43,16 @@ class EventsItem extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(event.playerName, style: AppStyles.body12),
+            Text(event.playerName, style: AppStyles.body12(context)),
             if (_eventSubTitle() != null)
-              Text(_eventSubTitle()!, style: AppStyles.grayBody10),
+              Text(_eventSubTitle()!, style: AppStyles.grayBody10(context)),
           ],
         ),
       ],
     );
   }
 
-  Widget _awayTeamEvent() {
+  Widget _awayTeamEvent({required BuildContext context}) {
     return Row(
       textDirection: TextDirection.rtl,
       children: [
@@ -64,9 +64,9 @@ class EventsItem extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            Text(event.playerName, style: AppStyles.body12),
+            Text(event.playerName, style: AppStyles.body12(context)),
             if (_eventSubTitle() != null)
-              Text(_eventSubTitle()!, style: AppStyles.grayBody10),
+              Text(_eventSubTitle()!, style: AppStyles.grayBody10(context)),
           ],
         ),
       ],

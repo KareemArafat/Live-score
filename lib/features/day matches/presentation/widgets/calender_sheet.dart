@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:live_score_app/core/responsive_helpers/size_helper_extensions.dart';
 import 'package:live_score_app/core/theme/app_colors.dart';
 import 'package:live_score_app/core/theme/app_styles.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -19,16 +20,19 @@ class _CalendarSheetState extends State<CalendarSheet> {
     return Dialog(
       child: Container(
         padding: const EdgeInsets.all(12),
-        height: MediaQuery.of(context).size.height / 2.5,
+        height: context.isLandscape
+            ? context.screenHeight / 1.2
+            : context.screenHeight / 2.5,
+        width: context.screenWidth / 1.2,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(25),
         ),
         child: TableCalendar(
-          daysOfWeekHeight: 20,
+          daysOfWeekHeight: context.h(50),
           shouldFillViewport: true,
           headerStyle: HeaderStyle(
-            titleTextStyle: AppStyles.body14,
+            titleTextStyle: AppStyles.body12(context),
             headerPadding: EdgeInsets.zero,
             headerMargin: const EdgeInsets.only(bottom: 8),
             titleCentered: true,
@@ -40,11 +44,11 @@ class _CalendarSheetState extends State<CalendarSheet> {
             ),
           ),
           calendarStyle: CalendarStyle(
-            defaultTextStyle: AppStyles.blockBody12,
-            weekendTextStyle: AppStyles.blockBody12,
-            todayTextStyle: AppStyles.blockBody12,
-            outsideTextStyle: AppStyles.grayBody12,
-            selectedTextStyle: AppStyles.body12,
+            defaultTextStyle: AppStyles.blockBody10(context),
+            weekendTextStyle: AppStyles.blockBody10(context),
+            todayTextStyle: AppStyles.blockBody10(context),
+            outsideTextStyle: AppStyles.blockBody10(context),
+            selectedTextStyle: AppStyles.body10(context),
             todayDecoration: BoxDecoration(
               shape: BoxShape.circle,
               border: Border.all(color: AppColors.baseColor2, width: 1.4),

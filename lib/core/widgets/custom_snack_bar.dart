@@ -6,7 +6,7 @@ void customSnackBar(BuildContext context, String errMess) {
     SnackBar(
       backgroundColor: Colors.red,
       duration: Duration(seconds: 3),
-      content: Text(errMess, style: AppStyles.body14),
+      content: Text(errMess, style: AppStyles.body14(context)),
     ),
   );
 }

@@ -81,12 +81,12 @@ class _MatchLineupTabBarState extends State<MatchLineupTabBar>
   Widget tabButton(String text, bool isSelected) {
     return isSelected
         ? CustomGradientBorder(
-            widget: Center(child: Text(text, style: AppStyles.body10)),
             height: 40,
             width: 300,
             border: 8,
             linearGradient: AppColors.blueGradient,
+            child: Center(child: Text(text, style: AppStyles.body10(context))),
           )
-        : Text(text, style: AppStyles.body10);
+        : Text(text, style: AppStyles.body10(context));
   }
 }

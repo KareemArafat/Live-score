@@ -15,7 +15,7 @@ class ItemTitle extends StatelessWidget {
         linearGradient: AppColors.greenGradient,
         widget: Text(
           title,
-          style: AppStyles.heading16.copyWith(fontWeight: FontWeight.bold),
+          style: AppStyles.heading16(context).copyWith(fontWeight: FontWeight.bold),
         ),
       ),
     );

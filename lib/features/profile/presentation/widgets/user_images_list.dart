@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:live_score_app/core/responsive_helpers/size_helper_extensions.dart';
 import 'package:live_score_app/features/profile/presentation/manager/profile%20cubit/profile_cubit.dart';
 import 'package:live_score_app/features/profile/presentation/widgets/user_images_list_item.dart';
 
@@ -42,9 +43,8 @@ class _UserImagesListState extends State<UserImagesList> {
 
   @override
   Widget build(BuildContext context) {
-    final double size = MediaQuery.of(context).size.height * 0.3;
     return SizedBox(
-      height: 300,
+      height: context.h(250),
       child: PageView.builder(
         controller: controller,
         itemCount: images.length,
@@ -55,7 +55,7 @@ class _UserImagesListState extends State<UserImagesList> {
           return AnimatedScale(
             scale: scale,
             duration: Duration(milliseconds: 200),
-            child: UserImagesListItem(image: images[index], size: size),
+            child: UserImagesListItem(image: images[index]),
           );
         },
       ),

@@ -24,7 +24,7 @@ class SquadPositionSection extends StatelessWidget {
       child: CustomGradientBorder(
         border: 8,
         linearGradient: AppColors.blueGradient,
-        widget: Padding(
+        child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -33,7 +33,7 @@ class SquadPositionSection extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 8),
                 child: Text(
                   sectionName,
-                  style: AppStyles.body14.copyWith(fontWeight: FontWeight.bold),
+                  style: AppStyles.body14(context).copyWith(fontWeight: FontWeight.bold),
                 ),
               ),
               SizedBox(height: 6),

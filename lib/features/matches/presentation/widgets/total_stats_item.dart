@@ -19,13 +19,13 @@ class TotalStatsItem extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 8),
       child: Column(
         children: [
-          Text(homeTeamStats.statName, style: AppStyles.body10),
+          Text(homeTeamStats.statName, style: AppStyles.body10(context)),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(
                 width: 30,
-                child: Text(homeTeamStats.statValue, style: AppStyles.body10),
+                child: Text(homeTeamStats.statValue, style: AppStyles.body10(context)),
               ),
               SizedBox(width: 5),
               Expanded(
@@ -72,7 +72,7 @@ class TotalStatsItem extends StatelessWidget {
                 child: Text(
                   textAlign: TextAlign.end,
                   awayTeamStats.statValue,
-                  style: AppStyles.body10,
+                  style: AppStyles.body10(context),
                 ),
               ),
             ],

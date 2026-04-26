@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:live_score_app/core/responsive_helpers/size_helper_extensions.dart';
 import 'package:live_score_app/core/theme/app_colors.dart';
 import 'package:live_score_app/core/theme/app_images.dart';
+import 'package:live_score_app/core/theme/app_styles.dart';
 import 'package:live_score_app/core/widgets/custom_gradient_widget.dart';
 import 'package:live_score_app/core/widgets/custom_scaffold.dart';
 import 'package:live_score_app/features/day%20matches/presentation/views/day_matches_page.dart';
@@ -73,6 +75,7 @@ class _PageNavigationBarState extends State<PageNavigationBar> {
           splashFactory: NoSplash.splashFactory,
         ),
         child: BottomNavigationBar(
+          selectedFontSize: 0,
           currentIndex: currentIndex,
           onTap: _onTabClick,
           showSelectedLabels: false,
@@ -81,26 +84,26 @@ class _PageNavigationBarState extends State<PageNavigationBar> {
           elevation: 12,
           items: [
             BottomNavigationBarItem(
-              icon: _barItem(AppImages.matches, 'Matches'),
+              icon: _barItem(AppImages.matches, 'Matches', context),
               activeIcon: CustomGradientWidget(
                 linearGradient: AppColors.blueGradient,
-                widget: _barItem(AppImages.matches, 'Matches'),
+                widget: _barItem(AppImages.matches, 'Matches', context),
               ),
               label: "",
             ),
             BottomNavigationBarItem(
-              icon: _barItem(AppImages.leagues, 'Leagues'),
+              icon: _barItem(AppImages.leagues, 'Leagues', context),
               activeIcon: CustomGradientWidget(
                 linearGradient: AppColors.blueGradient,
-                widget: _barItem(AppImages.leagues, 'Leagues'),
+                widget: _barItem(AppImages.leagues, 'Leagues', context),
               ),
               label: "",
             ),
             BottomNavigationBarItem(
-              icon: _barItem(AppImages.fav, 'Favorites'),
+              icon: _barItem(AppImages.fav, 'Favorites', context),
               activeIcon: CustomGradientWidget(
                 linearGradient: AppColors.blueGradient,
-                widget: _barItem(AppImages.fav, 'Favorites'),
+                widget: _barItem(AppImages.fav, 'Favorites', context),
               ),
               label: "",
             ),
@@ -110,7 +113,13 @@ class _PageNavigationBarState extends State<PageNavigationBar> {
     );
   }
 
-  Widget _barItem(String image, String label) {
-    return Column(children: [Image.asset(image, height: 30), Text(label)]);
+  Widget _barItem(String image, String label, BuildContext context) {
+    return Column(
+      children: [
+        SizedBox(height: 2),
+        Image.asset(image, height: context.r(30)),
+        Text(label, style: AppStyles.body14(context)),
+      ],
+    );
   }
 }

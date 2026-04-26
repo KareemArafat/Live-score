@@ -1,5 +1,5 @@
 import 'package:live_score_app/features/matches/domain/entities/match_details_entity/events_entity.dart';
-import 'package:live_score_app/features/matches/domain/entities/match_details_entity/info_entity.dart';
+import 'package:live_score_app/features/matches/domain/entities/match_details_entity/match_info_entity.dart';
 import 'package:live_score_app/features/matches/domain/entities/match_details_entity/lineup_entity.dart';
 
 class MatchDetailsEntity {
@@ -14,7 +14,7 @@ class MatchDetailsEntity {
   final List<EventsEntity> events;
   final LineupEntity? homeLineUp;
   final LineupEntity? awayLineUp;
-  final InfoEntity info;
+  final MatchInfoEntity info;
   final bool hasLineups;
   final bool hasStats;
   final bool hasStandings;

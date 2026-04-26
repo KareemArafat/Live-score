@@ -17,7 +17,7 @@ class Member extends MemberEntity {
          playerId: athleteId ?? 0,
          playerName: name ?? '',
          playerShortName: shortName ?? '',
-         playerImage: ApiConst.playerImage(athleteId ?? 0),
+         playerImage: ApiConst.playerTeamImage(athleteId ?? 0),
          number: jerseyNumber,
        );
 

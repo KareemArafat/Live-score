@@ -19,7 +19,7 @@ class AthletesStatRow extends LeaguePlayersStatsEntity {
   }) : super(
          playerId: playerStatsInfo?.id ?? 0,
          playerName: playerStatsInfo?.name ?? '',
-         playerImage: ApiConst.playerImage(playerStatsInfo?.id ?? 0),
+         playerImage: ApiConst.playerTeamImage(playerStatsInfo?.id ?? 0),
          teamId: playerStatsInfo?.competitorId ?? 0,
          teamName: teamName ?? '',
          teamLogo: teamLogo ?? '',

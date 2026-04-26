@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:live_score_app/core/responsive_helpers/size_helper_extensions.dart';
 import 'package:live_score_app/core/theme/app_colors.dart';
 import 'package:live_score_app/core/theme/app_styles.dart';
 import 'package:live_score_app/core/utils/app_const.dart';
@@ -21,19 +22,19 @@ class SliderMenu extends StatelessWidget {
       backgroundColor: AppColors.groundColor,
       shadowColor: AppColors.baseColor1,
 
-      child: Column(
+      child: ListView(
         children: [
           DrawerHeader(
-            margin: EdgeInsets.symmetric(vertical: 20),
+            margin: EdgeInsets.symmetric(vertical: context.h(20)),
             child: Column(
               children: [
                 UserImage(image: user?.image ?? ''),
                 SizedBox(height: 10),
                 Text(
                   user?.name ?? '',
-                  style: AppStyles.heading18.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: AppStyles.heading18(
+                    context,
+                  ).copyWith(fontWeight: FontWeight.bold),
                 ),
               ],
             ),
@@ -46,7 +47,7 @@ class SliderMenu extends StatelessWidget {
           SliderMenuItem(
             iconData: Icons.share,
             tittle: 'Share App',
-            onTap: () => shareFn(
+            onTap: () => shareItem(
               url:
                   'The best live score app is here! ⚽\n\n'
                   'https://github.com/KareemArafat/Live-score',

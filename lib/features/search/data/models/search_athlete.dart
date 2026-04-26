@@ -20,7 +20,7 @@ class SearchAthlete extends PlayerEntity {
   }) : super(
          playerId: id,
          playerName: name,
-         playerImage: ApiConst.playerImage(id),
+         playerImage: ApiConst.playerTeamImage(id),
          teamId: clubId,
          teamName: clubName,
          teamImage: ApiConst.teamImage(clubId),

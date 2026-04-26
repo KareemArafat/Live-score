@@ -92,13 +92,13 @@ class _LeagueStatsViewState extends State<LeagueStatsView>
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
       child: isSelected
           ? CustomGradientBorder(
-              widget: Center(child: Text(text, style: AppStyles.body14)),
               height: 40,
               width: 300,
               border: 8,
               linearGradient: AppColors.blueGradient,
+              child: Center(child: Text(text, style: AppStyles.body14(context))),
             )
-          : Text(text, style: AppStyles.body14),
+          : Text(text, style: AppStyles.body14(context)),
     );
   }
 

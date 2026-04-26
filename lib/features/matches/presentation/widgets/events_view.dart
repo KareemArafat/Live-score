@@ -29,7 +29,7 @@ class _EventsViewState extends State<EventsView>
                 if (events.isNotEmpty) EventsList(events: events),
                 SliverToBoxAdapter(child: SizedBox(height: 20)),
                 SliverToBoxAdapter(
-                  child: MatchInfo(info: state.matchDetails.info),
+                  child: MatchInfo(info : state.matchDetails.info),
                 ),
                 SliverToBoxAdapter(child: SizedBox(height: 20)),
               ],

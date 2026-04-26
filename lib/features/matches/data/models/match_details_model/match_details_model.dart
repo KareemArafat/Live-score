@@ -4,7 +4,7 @@ import 'package:live_score_app/features/matches/data/models/match_details_model/
 import 'package:live_score_app/features/matches/data/models/match_details_model/member.dart';
 import 'package:live_score_app/features/matches/data/models/match_details_model/official.dart';
 import 'package:live_score_app/features/matches/data/models/match_details_model/venue.dart';
-import 'package:live_score_app/features/matches/domain/entities/match_details_entity/info_entity.dart';
+import 'package:live_score_app/features/matches/domain/entities/match_details_entity/match_info_entity.dart';
 import 'package:live_score_app/features/matches/domain/entities/match_details_entity/match_details_entity.dart';
 import 'package:live_score_app/features/matches/domain/entities/match_details_entity/events_entity.dart';
 import 'package:live_score_app/features/matches/domain/entities/match_details_entity/member_entity.dart';
@@ -150,7 +150,7 @@ class MatchDetailsModel {
       hasLineups: hasLineups ?? false,
       hasStats: hasStats ?? false,
       hasStandings: hasStandings ?? false,
-      info: InfoEntity(
+      info: MatchInfoEntity(
         startTime: startTime ?? '',
         venueName: venue?.shortName ?? '',
         venueCapacity: venue?.capacity ?? 50000,

@@ -22,7 +22,7 @@ class FavPageBody extends StatelessWidget {
                   return Center(
                     child: Text(
                       'No favorite teams added yet',
-                      style: AppStyles.body14,
+                      style: AppStyles.body14(context),
                     ),
                   );
                 }
@@ -32,6 +32,7 @@ class FavPageBody extends StatelessWidget {
                     crossAxisCount: 2,
                     crossAxisSpacing: 8,
                     mainAxisSpacing: 8,
+                    childAspectRatio: 1,
                   ),
                   itemCount: favTeams.length,
                   itemBuilder: (context, index) =>

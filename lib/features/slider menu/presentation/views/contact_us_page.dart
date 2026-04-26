@@ -12,8 +12,9 @@ class ContactUs extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomScaffold(
       appBar: AppBar(
+        scrolledUnderElevation: 0,
         backgroundColor: Colors.transparent,
-        title: Text('Contact Us', style: AppStyles.heading18),
+        title: Text('Contact Us', style: AppStyles.heading18(context)),
         iconTheme: IconThemeData(color: Colors.white),
       ),
       body: SingleChildScrollView(
@@ -26,12 +27,14 @@ class ContactUs extends StatelessWidget {
                 'We’re always happy to hear from you! ⚽\n\n'
                 'If you have any questions, feedback, suggestions, or if you experience any issues while using our Live Score app, feel free to reach out to us. Your feedback helps us improve the app and deliver a better experience for all football fans.\n\n'
                 'Our support team will do their best to respond as quickly as possible.',
-                style: AppStyles.body14,
+                style: AppStyles.body14(context),
               ),
               SizedBox(height: 40),
               Text(
                 'Get in touch with us:',
-                style: AppStyles.body14.copyWith(fontWeight: FontWeight.bold),
+                style: AppStyles.body14(
+                  context,
+                ).copyWith(fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 16),
               SupportButton(
@@ -44,7 +47,7 @@ class ContactUs extends StatelessWidget {
               ),
               Text(
                 'For general inquiries or detailed issues, send us an email and we’ll get back to you soon.',
-                style: AppStyles.grayBody12,
+                style: AppStyles.grayBody12(context),
               ),
               SizedBox(height: 20),
               SupportButton(
@@ -54,14 +57,13 @@ class ContactUs extends StatelessWidget {
               ),
               Text(
                 'For faster communication, you can contact us directly on WhatsApp.',
-                style: AppStyles.grayBody12,
+                style: AppStyles.grayBody12(context),
               ),
 
               SizedBox(height: 24),
-
               Text(
                 'Thank you for using our app and supporting us ❤️',
-                style: AppStyles.body14,
+                style: AppStyles.body14(context),
               ),
             ],
           ),

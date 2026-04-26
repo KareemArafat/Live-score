@@ -9,9 +9,9 @@ import 'package:live_score_app/shard/entities/match_entity.dart';
 import 'package:live_score_app/shard/entities/team_entity.dart';
 
 class DayMatchesRepoImpl extends DayMatchesRepo {
-  final DayMatchesRemoteDataSource _dayMatchesRemoteDataSource;
+  final DayMatchesRemoteDataSource dayMatchesRemoteDataSource;
 
-  DayMatchesRepoImpl(this._dayMatchesRemoteDataSource);
+  DayMatchesRepoImpl(this.dayMatchesRemoteDataSource);
 
   @override
   @override
@@ -19,7 +19,7 @@ class DayMatchesRepoImpl extends DayMatchesRepo {
     String? day,
   }) async {
     try {
-      final matches = await _dayMatchesRemoteDataSource.getDayMatches(day: day);
+      final matches = await dayMatchesRemoteDataSource.getDayMatches(day: day);
       return right(matches);
     } catch (e) {
       if (e is DioException) {

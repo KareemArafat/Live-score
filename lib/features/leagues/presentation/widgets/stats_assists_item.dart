@@ -17,7 +17,7 @@ class StatsAssistsItem extends StatelessWidget {
         children: [
           SizedBox(
             width: 15,
-            child: Text(rank.toString(), style: AppStyles.body12),
+            child: Text(rank.toString(), style: AppStyles.body12(context)),
           ),
           SizedBox(width: 5),
         PlayerImage(image: player.playerImage),
@@ -27,13 +27,13 @@ class StatsAssistsItem extends StatelessWidget {
             children: [
               Text(
                 player.playerName,
-                style: AppStyles.body12.copyWith(fontWeight: FontWeight.w500),
+                style: AppStyles.body12(context).copyWith(fontWeight: FontWeight.w500),
               ),
               Row(
                 children: [
                   CustomNetworkImage(imageUrl: player.teamLogo, size: 12),
                   SizedBox(width: 5),
-                  Text(player.teamName, style: AppStyles.grayBody10),
+                  Text(player.teamName, style: AppStyles.grayBody10(context)),
                 ],
               ),
             ],
@@ -42,7 +42,7 @@ class StatsAssistsItem extends StatelessWidget {
           SizedBox(
             width: 50,
             child: Center(
-              child: Text(player.assists.toString(), style: AppStyles.body12),
+              child: Text(player.assists.toString(), style: AppStyles.body12(context)),
             ),
           ),
         ],

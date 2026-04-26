@@ -14,7 +14,7 @@ class EventsList extends StatelessWidget {
       itemCount: events.length + 1,
       itemBuilder: (context, index) {
         if (index == 0) {
-          return _eventsTitle('Match Events');
+          return _eventsTitle('Match Events', context);
         }
         final item = events[index - 1];
         return EventsItem(event: item);
@@ -22,7 +22,7 @@ class EventsList extends StatelessWidget {
     );
   }
 
-  Widget _eventsTitle(String text) {
+  Widget _eventsTitle(String text,BuildContext context) {
     return Center(
       child: Container(
         margin: EdgeInsets.symmetric(vertical: 12),
@@ -31,7 +31,7 @@ class EventsList extends StatelessWidget {
           gradient: AppColors.blueGradient,
           borderRadius: BorderRadius.circular(12),
         ),
-        child: Text(text, style: AppStyles.body10),
+        child: Text(text, style: AppStyles.body10(context)),
       ),
     );
   }

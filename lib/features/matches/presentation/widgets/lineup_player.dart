@@ -48,7 +48,7 @@ class LineupPlayer extends StatelessWidget {
                   child: Center(
                     child: Text(
                       player.rate.toString(),
-                      style: AppStyles.body10,
+                      style: AppStyles.body10(context),
                     ),
                   ),
                 ),
@@ -99,7 +99,7 @@ class LineupPlayer extends StatelessWidget {
               child: Text(
                 player.playerName,
                 overflow: TextOverflow.ellipsis,
-                style: AppStyles.blockBody10,
+                style: AppStyles.blockBody10(context),
               ),
             ),
           ),

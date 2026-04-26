@@ -26,7 +26,7 @@ class PossessionStat extends StatelessWidget {
             percent: parsePercentage(homeTeamPossession),
             center: Text(
               homeTeamPossession,
-              style: AppStyles.body14.copyWith(fontWeight: FontWeight.w600),
+              style: AppStyles.body14(context).copyWith(fontWeight: FontWeight.w600),
             ),
             circularStrokeCap: CircularStrokeCap.round,
           ),
@@ -34,7 +34,7 @@ class PossessionStat extends StatelessWidget {
           Spacer(),
           Text(
             'Possession',
-            style: AppStyles.body14.copyWith(fontWeight: FontWeight.w600),
+            style: AppStyles.body14(context).copyWith(fontWeight: FontWeight.w600),
           ),
           Spacer(),
           CircularPercentIndicator(
@@ -46,7 +46,7 @@ class PossessionStat extends StatelessWidget {
             percent: parsePercentage(awayTeamPossession),
             center: Text(
               awayTeamPossession,
-              style: AppStyles.body14.copyWith(fontWeight: FontWeight.w600),
+              style: AppStyles.body14(context).copyWith(fontWeight: FontWeight.w600),
             ),
             circularStrokeCap: CircularStrokeCap.round,
           ),

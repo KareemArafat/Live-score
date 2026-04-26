@@ -53,7 +53,7 @@ Future<void> openUrl({required String url}) async {
   }
 }
 
-Future<void> shareFn({
+Future<void> shareItem({
   required String url,
   String? title,
   String? subTitle,

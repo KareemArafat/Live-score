@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:live_score_app/core/theme/app_colors.dart';
 
 class CustomGradientBorder extends StatelessWidget {
   const CustomGradientBorder({
     super.key,
-    required this.widget,
+    required this.child,
     required this.border,
-    required this.linearGradient,
+    this.linearGradient = AppColors.blueGradient,
     this.height,
     this.width,
   });
 
-  final Widget widget;
+  final Widget child;
   final double border;
   final double? height;
   final double? width;
@@ -22,7 +23,10 @@ class CustomGradientBorder extends StatelessWidget {
       painter: GradientBorderPainter(border, linearGradient),
       child: Padding(
         padding: const EdgeInsets.all(2),
-        child: SizedBox(height: height, width: width, child: widget),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(border),
+          child: SizedBox(height: height, width: width, child: child),
+        ),
       ),
     );
   }

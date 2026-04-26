@@ -1,5 +1,7 @@
+import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:live_score_app/core/responsive_helpers/size_provider.dart';
 import 'package:live_score_app/core/utils/app_routers.dart';
 import 'package:live_score_app/core/utils/cubit_observer.dart';
 import 'package:live_score_app/core/utils/functions.dart';
@@ -15,7 +17,12 @@ void main() async {
   setupGetIt();
   await setUpHive();
   final isSeen = await ShardPref.getOnBoarding();
-  runApp(LiveScoreApp(isSeen: isSeen));
+  runApp(
+    DevicePreview(
+      enabled: true,
+      builder: (context) => LiveScoreApp(isSeen: isSeen),
+    ),
+  );
 }
 
 class LiveScoreApp extends StatelessWidget {
@@ -33,17 +40,26 @@ class LiveScoreApp extends StatelessWidget {
         ),
       ],
 
-      child: MaterialApp.router(
-        routerConfig: AppRouters.router(isSeen),
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData.dark().copyWith(
-          textTheme: ThemeData.dark().textTheme.apply(
-            fontFamily: 'Poppins',
-            bodyColor: Colors.white,
-            displayColor: Colors.white,
-          ),
-          iconTheme: IconThemeData(color: Colors.white),
-        ),
+      child: Builder(
+        builder: (context) {
+          return SizeProvider(
+            baseSize: Size(360, 800),
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            child: MaterialApp.router(
+              routerConfig: AppRouters.router(isSeen),
+              debugShowCheckedModeBanner: false,
+              theme: ThemeData.dark().copyWith(
+                textTheme: ThemeData.dark().textTheme.apply(
+                  fontFamily: 'Poppins',
+                  bodyColor: Colors.white,
+                  displayColor: Colors.white,
+                ),
+                iconTheme: IconThemeData(color: Colors.white),
+              ),
+            ),
+          );
+        },
       ),
     );
   }

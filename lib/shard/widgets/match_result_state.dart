@@ -60,31 +60,31 @@ class MatchResultState extends StatelessWidget {
                 child: Text(
                   textAlign: TextAlign.center,
                   homeGoals.toString(),
-                  style: AppStyles.body12.copyWith(fontWeight: FontWeight.w500),
+                  style: AppStyles.body12(context).copyWith(fontWeight: FontWeight.w500),
                 ),
               ),
               CustomGradientBorder(
                 linearGradient: AppColors.greenGradient,
                 border: 18,
-                widget: Center(
-                  child: Text(_getMatchState(), style: AppStyles.body10),
-                ),
                 height: radius,
                 width: radius,
+                child: Center(
+                  child: Text(_getMatchState(), style: AppStyles.body10(context)),
+                ),
               ),
               SizedBox(
                 width: 18,
                 child: Text(
                   textAlign: TextAlign.center,
                   awayGoals.toString(),
-                  style: AppStyles.body12.copyWith(fontWeight: FontWeight.w500),
+                  style: AppStyles.body12(context).copyWith(fontWeight: FontWeight.w500),
                 ),
               ),
             ],
           )
         : Text(
             status == 'Scheduled' ? time : status,
-            style: AppStyles.grayBody10,
+            style: AppStyles.grayBody10(context),
           );
   }
 }

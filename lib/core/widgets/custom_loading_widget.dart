@@ -1,20 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:live_score_app/core/responsive_helpers/size_helper_extensions.dart';
 import 'package:live_score_app/core/theme/app_colors.dart';
 
 class CustomLoadingWidget extends StatelessWidget {
-  const CustomLoadingWidget({
-    super.key,
-    this.size = 5,
-    this.withSecColor = false,
-  });
-  final double size;
+  const CustomLoadingWidget({super.key, this.size, this.withSecColor = false});
+  final double? size;
   final bool withSecColor;
 
   @override
   Widget build(BuildContext context) {
     return Center(
       child: CircularProgressIndicator(
-        strokeAlign: size,
+        strokeAlign: size ?? context.r(10),
         strokeWidth: 2,
         backgroundColor: withSecColor
             ? AppColors.secColor1

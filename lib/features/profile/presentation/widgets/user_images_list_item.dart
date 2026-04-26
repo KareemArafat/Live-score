@@ -1,30 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:live_score_app/core/responsive_helpers/size_helper_extensions.dart';
 
 class UserImagesListItem extends StatelessWidget {
-  const UserImagesListItem({
-    super.key,
-    required this.image,
-    required this.size,
-  });
+  const UserImagesListItem({super.key, required this.image});
   final String image;
-  final double size;
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        return Container(
-          height: size,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: Colors.white,
-            image: DecorationImage(
-              image: AssetImage(image),
-              alignment: Alignment(0, 0.3),
-            ),
-          ),
-        );
-      },
+    return Container(
+      decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.white),
+      clipBehavior: Clip.antiAlias,
+      child: ClipOval(
+        child: Transform.translate(
+          offset: Offset(0, context.h(15)),
+          child: Image.asset(image),
+        ),
+      ),
     );
   }
 }

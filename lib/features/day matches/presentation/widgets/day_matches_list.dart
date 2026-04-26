@@ -27,7 +27,7 @@ class _MatchesDayListState extends State<MatchesDayList> {
   void startTimer() {
     Timer.periodic(Duration(minutes: 1), (timer) {
       if (cubit.day == dayDate && refresh) {
-        //  cubit.getDayMatches(isRefresh: true);
+        cubit.getDayMatches(isRefresh: true);
       }
     });
   }

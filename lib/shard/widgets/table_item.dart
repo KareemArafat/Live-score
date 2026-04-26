@@ -34,7 +34,7 @@ class TableItem extends StatelessWidget {
               child: Center(
                 child: Text(
                   teamRow.teamRank.toString(),
-                  style: AppStyles.body10.copyWith(color: textColor),
+                  style: AppStyles.body10(context).copyWith(color: textColor),
                 ),
               ),
             ),
@@ -48,7 +48,7 @@ class TableItem extends StatelessWidget {
                     ? "${teamRow.team!.teamName.substring(0, 15)}..."
                     : teamRow.team!.teamName,
                 overflow: TextOverflow.ellipsis,
-                style: AppStyles.body10.copyWith(color: textColor),
+                style: AppStyles.body10(context).copyWith(color: textColor),
               ),
             ),
             Spacer(),
@@ -57,7 +57,7 @@ class TableItem extends StatelessWidget {
               child: Center(
                 child: Text(
                   teamRow.matchesNum.toString(),
-                  style: AppStyles.body10.copyWith(color: textColor),
+                  style: AppStyles.body10(context).copyWith(color: textColor),
                 ),
               ),
             ),
@@ -67,7 +67,7 @@ class TableItem extends StatelessWidget {
               child: Center(
                 child: Text(
                   teamRow.wins.toString(),
-                  style: AppStyles.body10.copyWith(color: Colors.green),
+                  style: AppStyles.body10(context).copyWith(color: Colors.green),
                 ),
               ),
             ),
@@ -77,7 +77,7 @@ class TableItem extends StatelessWidget {
               child: Center(
                 child: Text(
                   teamRow.draws.toString(),
-                  style: AppStyles.body10.copyWith(color: Colors.yellow),
+                  style: AppStyles.body10(context).copyWith(color: Colors.yellow),
                 ),
               ),
             ),
@@ -87,7 +87,7 @@ class TableItem extends StatelessWidget {
               child: Center(
                 child: Text(
                   teamRow.loses.toString(),
-                  style: AppStyles.body10.copyWith(color: Colors.red),
+                  style: AppStyles.body10(context).copyWith(color: Colors.red),
                 ),
               ),
             ),
@@ -97,7 +97,7 @@ class TableItem extends StatelessWidget {
               child: Center(
                 child: Text(
                   ' ${teamRow.scored.toString()}/${teamRow.accepted.toString()} ',
-                  style: AppStyles.body10.copyWith(color: textColor),
+                  style: AppStyles.body10(context).copyWith(color: textColor),
                 ),
               ),
             ),
@@ -107,7 +107,7 @@ class TableItem extends StatelessWidget {
               child: Center(
                 child: Text(
                   teamRow.diff.toString(),
-                  style: AppStyles.body10.copyWith(color: textColor),
+                  style: AppStyles.body10(context).copyWith(color: textColor),
                 ),
               ),
             ),
@@ -117,7 +117,7 @@ class TableItem extends StatelessWidget {
               child: Center(
                 child: Text(
                   teamRow.totalPoints.toString(),
-                  style: AppStyles.body10.copyWith(
+                  style: AppStyles.body10(context).copyWith(
                     color: textColor,
                     fontWeight: FontWeight.w700,
                   ),

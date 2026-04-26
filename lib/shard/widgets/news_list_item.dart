@@ -44,7 +44,7 @@ class NewsListItem extends StatelessWidget {
             onTap: () => openUrl(url: news.url),
             child: Text(
               news.title,
-              style: AppStyles.heading16.copyWith(
+              style: AppStyles.heading16(context).copyWith(
                 fontWeight: FontWeight.w500,
                 decoration: TextDecoration.underline,
               ),
@@ -53,9 +53,9 @@ class NewsListItem extends StatelessWidget {
           SizedBox(height: 10),
           Row(
             children: [
-              Text(news.source, style: AppStyles.grayBody10),
+              Text(news.source, style: AppStyles.grayBody10(context)),
               Spacer(),
-              Text(formattedDate, style: AppStyles.grayBody10),
+              Text(formattedDate, style: AppStyles.grayBody10(context)),
             ],
           ),
         ],

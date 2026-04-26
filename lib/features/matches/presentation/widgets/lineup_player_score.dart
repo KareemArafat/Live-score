@@ -22,7 +22,7 @@ class LineupPlayerScore extends StatelessWidget {
           if (num > 1)
             Text(
               num.toString(),
-              style: AppStyles.body10.copyWith(color: Colors.black),
+              style: AppStyles.body10(context).copyWith(color: Colors.black),
             ),
           if (num > 1) SizedBox(width: 2),
           Row(children: [Image.asset(image, height: 10)]),

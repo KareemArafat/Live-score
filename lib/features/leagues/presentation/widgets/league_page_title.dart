@@ -25,9 +25,9 @@ class LeaguePageTitle extends StatelessWidget {
                 children: [
                   Text(
                     leagueNameSplit(league.leagueName),
-                    style: AppStyles.heading18,
+                    style: AppStyles.heading18(context),
                   ),
-                  Text(league.countryName!, style: AppStyles.grayBody12),
+                  Text(league.countryName!, style: AppStyles.grayBody12(context)),
                 ],
               ),
               Spacer(),

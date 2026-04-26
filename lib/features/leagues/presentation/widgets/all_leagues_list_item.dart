@@ -22,7 +22,7 @@ class AllLeaguesListItem extends StatelessWidget {
           children: [
             CustomNetworkImage(imageUrl: leagueEntity.leagueImage, size: 30),
             SizedBox(width: 10),
-            Text(leagueEntity.leagueName, style: AppStyles.heading16),
+            Text(leagueEntity.leagueName, style: AppStyles.heading16(context)),
           ],
         ),
       ),

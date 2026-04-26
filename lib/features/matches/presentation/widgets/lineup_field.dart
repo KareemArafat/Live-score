@@ -7,7 +7,7 @@ import 'package:live_score_app/features/matches/presentation/widgets/lineup_play
 class LineupField extends StatelessWidget {
   const LineupField({super.key, required this.lineup, required this.events});
   final LineupEntity lineup;
-  final List<EventsEntity>  events;
+  final List<EventsEntity> events;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class LineupField extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
         image: DecorationImage(
-          image: AssetImage(AppImages.field),
+          image: AssetImage(AppImages.lineupField),
           fit: BoxFit.fill,
         ),
       ),

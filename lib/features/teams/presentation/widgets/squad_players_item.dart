@@ -22,17 +22,17 @@ class SquadPlayersItem extends StatelessWidget {
       leading: PlayerImage(image: player.playerPhoto, isCoach: isCoach),
       title: Text(
         player.playerName,
-        style: AppStyles.body12.copyWith(fontWeight: FontWeight.w500),
+        style: AppStyles.body12(context).copyWith(fontWeight: FontWeight.w500),
       ),
       subtitle: Row(
         children: [
           CustomNetworkImage(imageUrl: player.countryFlag, size: 12),
           SizedBox(width: 2),
-          Text(player.countryName, style: AppStyles.grayBody10),
+          Text(player.countryName, style: AppStyles.grayBody10(context)),
         ],
       ),
       trailing: player.playerNumber != 0
-          ? Text(player.playerNumber.toString(), style: AppStyles.body12)
+          ? Text(player.playerNumber.toString(), style: AppStyles.body12(context))
           : null,
     );
   }

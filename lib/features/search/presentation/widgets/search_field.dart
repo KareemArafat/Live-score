@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:go_router/go_router.dart';
+import 'package:live_score_app/core/responsive_helpers/size_helper_extensions.dart';
 import 'package:live_score_app/core/theme/app_colors.dart';
 import 'package:live_score_app/core/utils/app_routers.dart';
 import 'package:live_score_app/core/widgets/custom_loading_widget.dart';
@@ -32,12 +33,15 @@ class _SearchFieldState extends State<SearchField> {
     return TypeAheadField<SearchResultEntity>(
       hideOnEmpty: true,
       hideOnError: true,
+      hideWithKeyboard: false,
       controller: searchController,
       debounceDuration: Duration(milliseconds: 400),
-      constraints: BoxConstraints(maxHeight: 500),
+      constraints: BoxConstraints(maxHeight: context.screenHeight / 2),
       onSelected: (item) {},
-      loadingBuilder: (context) =>
-          Container(color: AppColors.groundColor, child: CustomLoadingWidget()),
+      loadingBuilder: (context) => Container(
+        color: AppColors.groundColor,
+        child: CustomLoadingWidget(size: context.r(5)),
+      ),
       suggestionsCallback: (text) async =>
           await context.read<SearchResultCubit>().getSuggestions(text),
       builder: (context, searchController, searchFocusNode) => SearchTextField(

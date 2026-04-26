@@ -18,7 +18,7 @@ class ItemView extends StatelessWidget {
     return ListTile(
       dense: true,
       visualDensity: VisualDensity.comfortable,
-      title: Text(itemName, style: AppStyles.body14),
+      title: Text(itemName, style: AppStyles.body14(context)),
       leading: CustomNetworkImage(imageUrl: itemImage, size: 20),
       onTap: onTap,
     );

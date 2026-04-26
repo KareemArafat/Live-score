@@ -28,7 +28,7 @@ class MatchResultRow extends StatelessWidget {
             SizedBox(width: 3),
             SizedBox(
               width: 90,
-              child: Text(match.homeTeamName, style: AppStyles.body10),
+              child: Text(match.homeTeamName, style: AppStyles.body10(context)),
             ),
             Spacer(),
             MatchResultState(
@@ -45,7 +45,7 @@ class MatchResultRow extends StatelessWidget {
               child: Text(
                 textAlign: TextAlign.right,
                 match.awayTeamName,
-                style: AppStyles.body10,
+                style: AppStyles.body10(context),
               ),
             ),
             SizedBox(width: 3),

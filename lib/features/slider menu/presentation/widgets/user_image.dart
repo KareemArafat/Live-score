@@ -10,12 +10,20 @@ class UserImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Flexible(
       child: CustomGradientBorder(
-        linearGradient: AppColors.blueGradient,
         border: 500,
-        widget: CircleAvatar(
-          radius: 50,
-          backgroundImage: AssetImage(image),
-          backgroundColor: Colors.white,
+        linearGradient: AppColors.blueGradient,
+        child: ClipOval(
+          clipBehavior: Clip.antiAlias,
+          child: Container(
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: Colors.white,
+            ),
+            child: Transform.translate(
+              offset: const Offset(0, 5),
+              child: Image.asset(image),
+            ),
+          ),
         ),
       ),
     );

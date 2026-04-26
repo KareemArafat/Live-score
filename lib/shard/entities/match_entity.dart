@@ -11,13 +11,13 @@ class MatchEntity {
   final bool matchHasLineups;
   final bool matchHasStats;
   final bool matchHasStandings;
+  final int homeTeamGoals;
+  final int awayTeamGoals;
   final String date;
   final String status;
   final int? minutes;
   final int? round;
   final int? season;
-  final int homeTeamGoals;
-  final int awayTeamGoals;
   final LeagueEntity league;
 
   MatchEntity({
@@ -31,13 +31,13 @@ class MatchEntity {
     required this.matchHasLineups,
     required this.matchHasStats,
     required this.matchHasStandings,
-    required this.date,
-    required this.status,
-    required this.minutes,
-    required this.round,
-    required this.season,
     required this.homeTeamGoals,
     required this.awayTeamGoals,
+    required this.date,
+    required this.status,
+    this.minutes,
+    this.round,
+    this.season,
     required this.league,
-  });
+  }) ;
 }

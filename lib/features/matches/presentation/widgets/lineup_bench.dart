@@ -22,12 +22,12 @@ class LineupBench extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Substitutions', style: AppStyles.heading16),
+          Text('Substitutions', style: AppStyles.heading16(context)),
           SizedBox(height: 10),
           Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: lineup.substitutions!
-                .map((player) => _subPlayer(player, events))
+                .map((player) => _subPlayer(player, events, context))
                 .toList(),
           ),
         ],
@@ -35,7 +35,11 @@ class LineupBench extends StatelessWidget {
     );
   }
 
-  Widget _subPlayer(LineupMemberEntity player, List<EventsEntity> events) {
+  Widget _subPlayer(
+    LineupMemberEntity player,
+    List<EventsEntity> events,
+    BuildContext context,
+  ) {
     return ListTile(
       contentPadding: EdgeInsets.symmetric(vertical: 10),
       visualDensity: VisualDensity(vertical: -4),
@@ -43,9 +47,12 @@ class LineupBench extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 8),
         child: LineupPlayer(player: player, events: events),
       ),
-      title: Text(player.playerName, style: AppStyles.body12),
-      subtitle: Text(player.positionName, style: AppStyles.grayBody10),
-      trailing: Text(player.playerNum.toString(), style: AppStyles.body12),
+      title: Text(player.playerName, style: AppStyles.body12(context)),
+      subtitle: Text(player.positionName, style: AppStyles.grayBody10(context)),
+      trailing: Text(
+        player.playerNum.toString(),
+        style: AppStyles.body12(context),
+      ),
     );
   }
 }

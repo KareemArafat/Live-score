@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:live_score_app/core/responsive_helpers/size_helper_extensions.dart';
 import 'package:live_score_app/core/theme/app_colors.dart';
 import 'package:live_score_app/core/theme/app_styles.dart';
 import 'package:live_score_app/features/day%20matches/presentation/manager/day_matches_cubit/day_matches_cubit.dart';
@@ -57,13 +58,17 @@ class _DateSectionState extends State<DateSection> {
               ),
             );
           },
-          icon: Icon(Icons.calendar_month_outlined, color: AppColors.grayColor),
+          icon: Icon(
+            Icons.calendar_month_outlined,
+            color: AppColors.grayColor,
+            size: context.sp(20),
+          ),
         ),
-        Text(dayDate, style: AppStyles.grayBody12),
+        Text(dayDate, style: AppStyles.grayBody12(context)),
         Spacer(),
         Text(
           dayName,
-          style: AppStyles.heading18,
+          style: AppStyles.heading18(context),
           overflow: TextOverflow.ellipsis,
         ),
         Spacer(),
@@ -77,7 +82,7 @@ class _DateSectionState extends State<DateSection> {
           },
           icon: Icon(
             Icons.arrow_circle_left_outlined,
-            size: 27.5,
+            size: context.sp(28),
             color: AppColors.grayColor,
           ),
         ),
@@ -91,7 +96,7 @@ class _DateSectionState extends State<DateSection> {
           },
           icon: Icon(
             Icons.arrow_circle_right_outlined,
-            size: 27.5,
+            size: context.sp(28),
             color: AppColors.grayColor,
           ),
         ),

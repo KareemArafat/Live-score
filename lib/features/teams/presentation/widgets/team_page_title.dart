@@ -19,10 +19,10 @@ class TeamPageTitle extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(team.teamName, style: AppStyles.heading18),
+              Text(team.teamName, style: AppStyles.heading18(context)),
               Text(
                 team.countryName!,
-                style: AppStyles.body12.copyWith(color: AppColors.grayColor),
+                style: AppStyles.body12(context).copyWith(color: AppColors.grayColor),
               ),
             ],
           ),

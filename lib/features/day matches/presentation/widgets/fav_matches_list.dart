@@ -24,7 +24,7 @@ class FavMatchesList extends StatelessWidget {
             child: CustomGradientBorder(
               linearGradient: AppColors.blueGradient,
               border: 8,
-              widget: Padding(
+              child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 10, vertical: 14),
                 child: Row(
                   children: [
@@ -36,7 +36,7 @@ class FavMatchesList extends StatelessWidget {
                     Flexible(
                       child: Text(
                         'Favorite Matches',
-                        style: AppStyles.heading16,
+                        style: AppStyles.heading16(context),
                       ),
                     ),
                   ],
