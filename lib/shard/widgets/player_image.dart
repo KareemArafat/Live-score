@@ -6,17 +6,17 @@ class PlayerImage extends StatelessWidget {
   const PlayerImage({
     super.key,
     required this.image,
-    this.radius = 15,
+    required this.radius,
     this.isCoach = false,
   });
   final String image;
-  final int radius;
+  final double radius;
   final bool isCoach;
 
   @override
   Widget build(BuildContext context) {
     return CircleAvatar(
-      radius: radius.toDouble(),
+      radius: radius,
       backgroundColor: Colors.white,
       backgroundImage: AssetImage(isCoach ? AppImages.coach : AppImages.player),
       foregroundImage: CachedNetworkImageProvider(image),

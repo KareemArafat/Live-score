@@ -45,8 +45,14 @@ class _MatchLineupTabBarState extends State<MatchLineupTabBar>
             overlayColor: WidgetStateProperty.all(Colors.transparent),
             indicator: BoxDecoration(),
             tabs: [
-              tabButton(context.read<MatchEntity>().homeTeamName, index == 0),
-              tabButton(context.read<MatchEntity>().awayTeamName, index == 1),
+              tabButton(
+                context.read<MatchEntity>().homeTeam.teamName,
+                index == 0,
+              ),
+              tabButton(
+                context.read<MatchEntity>().awayTeam.teamName,
+                index == 1,
+              ),
             ],
           ),
         ),

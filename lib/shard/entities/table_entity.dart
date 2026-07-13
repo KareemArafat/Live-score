@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:live_score_app/shard/entities/team_entity.dart';
 
 class TableEntity {
-  final List<RowEntity> rows;
+  final List<TableRowEntity> rows;
   final List<SeasonEntity> seasons;
   final int currentSeason;
   const TableEntity({
@@ -12,8 +12,8 @@ class TableEntity {
   });
 }
 
-class RowEntity {
-  final TeamEntity? team;
+class TableRowEntity {
+  final TeamEntity team;
   final int teamRank;
   final int matchesNum;
   final int wins;
@@ -23,7 +23,7 @@ class RowEntity {
   final int accepted;
   final int diff;
   final int totalPoints;
-  const RowEntity({
+  const TableRowEntity({
     required this.team,
     required this.teamRank,
     required this.matchesNum,
@@ -43,5 +43,5 @@ class SeasonEntity extends Equatable {
   const SeasonEntity({required this.num, required this.name});
 
   @override
-  List<Object?> get props => [num, name];
+  List<Object> get props => [num];
 }

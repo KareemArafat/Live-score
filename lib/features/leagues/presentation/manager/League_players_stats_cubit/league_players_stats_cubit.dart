@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:live_score_app/features/leagues/domain/entities/league_stats_entity.dart';
+import 'package:live_score_app/features/leagues/domain/entities/league_stats_entity/league_stats_entity.dart';
 import 'package:live_score_app/features/leagues/domain/use_cases/get_league_players_stats_use_case.dart';
 
 part 'league_players_stats_state.dart';

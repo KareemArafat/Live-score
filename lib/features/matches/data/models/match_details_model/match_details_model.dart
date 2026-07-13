@@ -126,20 +126,20 @@ class MatchDetailsModel {
       for (var i in members) i.id ?? 0: i,
     };
 
-    final List<EventsEntity> eventsList = [];
+    final List<EventEntity> eventsList = [];
     for (var i in events) {
       eventsList.add(i.toEntity(membersMap));
     }
 
     return MatchDetailsEntity(
-      matchId: id ?? 0,
-      leagueId: competitionId ?? 0,
+      matchId: id!,
+      leagueId: competitionId!,
       leagueName: competitionDisplayName ?? '',
-      leagueImage: ApiConst.leagueImage(competitionId ?? 0),
+      leagueImage: ApiConst.leagueImage(competitionId!),
       homeTeamGoals: homeCompetitor?.score?.toInt() ?? 0,
       awayTeamGoals: awayCompetitor?.score?.toInt() ?? 0,
       minutes: gameTime?.toInt() ?? 0,
-      matchStatus: shortStatusText ?? '',
+      matchStatus: statusText!,
       events: eventsList,
       homeLineUp: hasLineups ?? false
           ? homeCompetitor?.toEntity(membersMap)
@@ -151,10 +151,12 @@ class MatchDetailsModel {
       hasStats: hasStats ?? false,
       hasStandings: hasStandings ?? false,
       info: MatchInfoEntity(
-        startTime: startTime ?? '',
-        venueName: venue?.shortName ?? '',
-        venueCapacity: venue?.capacity ?? 50000,
-        officialName: officials.isNotEmpty ? officials[0].name! : 'Un Known',
+        startTime: startTime!,
+        leagueName: competitionDisplayName!,
+        leagueImage: ApiConst.leagueImage(competitionId!),
+        venueName: venue?.shortName,
+        venueCapacity: venue?.capacity,
+        officialName: officials[0].name,
       ),
     );
   }

@@ -2,13 +2,13 @@ import 'package:live_score_app/core/utils/app_const.dart';
 import 'package:live_score_app/features/matches/data/models/match_total_stats_model/statistic.dart';
 import 'package:live_score_app/features/matches/domain/entities/match_total_stats_entity/match_stat_entity.dart';
 import 'package:live_score_app/features/matches/domain/entities/match_total_stats_entity/match_total_stats_entity.dart';
-import 'package:live_score_app/shard/models/competitor_model.dart';
+import 'package:live_score_app/shard/models/team_model.dart';
 
 class MatchTotalStatsModel {
   MatchTotalStatsModel({required this.statistics, required this.competitors});
 
   final List<Statistic> statistics;
-  final List<CompetitorModel> competitors;
+  final List<TeamModel> competitors;
 
   factory MatchTotalStatsModel.fromJson(Map<String, dynamic> json) {
     return MatchTotalStatsModel(
@@ -20,8 +20,8 @@ class MatchTotalStatsModel {
 
       competitors: json["competitors"] == null
           ? []
-          : List<CompetitorModel>.from(
-              json["competitors"]!.map((x) => CompetitorModel.fromJson(x)),
+          : List<TeamModel>.from(
+              json["competitors"]!.map((x) => TeamModel.fromJson(x)),
             ),
     );
   }

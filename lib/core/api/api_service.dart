@@ -15,7 +15,7 @@ class ApiServices {
     var response = await dio.get(
       endPoint,
       queryParameters: queryParameters,
-      options: Options(headers: ApiConst.headers),
+  //    options: Options(headers: ApiConst.headers),
       cancelToken: cancelToken,
     );
     //   log(response.toString());

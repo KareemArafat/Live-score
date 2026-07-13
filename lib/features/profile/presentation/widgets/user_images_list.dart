@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:live_score_app/core/responsive_helpers/size_helper_extensions.dart';
 import 'package:live_score_app/features/profile/presentation/manager/profile%20cubit/profile_cubit.dart';
-import 'package:live_score_app/features/profile/presentation/widgets/user_images_list_item.dart';
+import 'package:live_score_app/shard/widgets/user_image.dart';
 
 class UserImagesList extends StatefulWidget {
   const UserImagesList({super.key});
@@ -52,10 +52,9 @@ class _UserImagesListState extends State<UserImagesList> {
         itemBuilder: (context, index) {
           double diff = (currentPage - index).abs();
           double scale = (1 - (diff * 0.3)).clamp(0.7, 1.0);
-          return AnimatedScale(
+          return Transform.scale(
             scale: scale,
-            duration: Duration(milliseconds: 200),
-            child: UserImagesListItem(image: images[index]),
+            child: UserImage(image: images[index]),
           );
         },
       ),

@@ -1,13 +1,10 @@
-import 'package:live_score_app/shard/entities/league_entity.dart';
+import 'package:live_score_app/shard/entities/team_entity.dart';
 
 class MatchEntity {
   final int matchId;
-  final int homeTeamId;
-  final String homeTeamName;
-  final String homeTeamImage;
-  final int awayTeamId;
-  final String awayTeamName;
-  final String awayTeamImage;
+  final int leagueId;
+  final String leagueName;
+  final String leagueImage;
   final bool matchHasLineups;
   final bool matchHasStats;
   final bool matchHasStandings;
@@ -15,19 +12,17 @@ class MatchEntity {
   final int awayTeamGoals;
   final String date;
   final String status;
+  final TeamEntity homeTeam;
+  final TeamEntity awayTeam;
   final int? minutes;
   final int? round;
   final int? season;
-  final LeagueEntity league;
 
   MatchEntity({
     required this.matchId,
-    required this.homeTeamId,
-    required this.homeTeamName,
-    required this.homeTeamImage,
-    required this.awayTeamId,
-    required this.awayTeamName,
-    required this.awayTeamImage,
+    required this.leagueId,
+    required this.leagueName,
+    required this.leagueImage,
     required this.matchHasLineups,
     required this.matchHasStats,
     required this.matchHasStandings,
@@ -35,9 +30,10 @@ class MatchEntity {
     required this.awayTeamGoals,
     required this.date,
     required this.status,
-    this.minutes,
-    this.round,
-    this.season,
-    required this.league,
-  }) ;
+    required this.homeTeam,
+    required this.awayTeam,
+    required this.minutes,
+    required this.round,
+    required this.season,
+  });
 }

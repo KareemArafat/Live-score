@@ -38,7 +38,7 @@ class UserNameTextField extends StatelessWidget {
               hintText: " User Name",
               hintStyle: AppStyles.grayBody12(context),
               isDense: true,
-              contentPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+              contentPadding: EdgeInsets.zero,
             ),
           ),
         ),

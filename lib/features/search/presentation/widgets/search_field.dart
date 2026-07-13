@@ -21,10 +21,12 @@ class SearchField extends StatefulWidget {
 
 class _SearchFieldState extends State<SearchField> {
   final TextEditingController searchController = TextEditingController();
+  final FocusNode searchFocusNode = FocusNode();
 
   @override
   void dispose() {
     searchController.dispose();
+    searchFocusNode.dispose();
     super.dispose();
   }
 
@@ -38,10 +40,8 @@ class _SearchFieldState extends State<SearchField> {
       debounceDuration: Duration(milliseconds: 400),
       constraints: BoxConstraints(maxHeight: context.screenHeight / 2),
       onSelected: (item) {},
-      loadingBuilder: (context) => Container(
-        color: AppColors.groundColor,
-        child: CustomLoadingWidget(size: context.r(5)),
-      ),
+      loadingBuilder: (context) =>
+          Container(color: AppColors.groundColor, child: CustomLoadingWidget()),
       suggestionsCallback: (text) async =>
           await context.read<SearchResultCubit>().getSuggestions(text),
       builder: (context, searchController, searchFocusNode) => SearchTextField(
@@ -65,6 +65,7 @@ class _SearchFieldState extends State<SearchField> {
                         context,
                       ).push(AppRouters.leagueDetailsPage, extra: league);
                       searchController.clear();
+                      searchFocusNode.unfocus();
                     },
                   ),
                 ),
@@ -80,6 +81,7 @@ class _SearchFieldState extends State<SearchField> {
                         context,
                       ).push(AppRouters.teamPage, extra: team);
                       searchController.clear();
+                      searchFocusNode.unfocus();
                     },
                   ),
                 ),

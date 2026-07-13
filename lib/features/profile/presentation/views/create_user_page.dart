@@ -21,14 +21,15 @@ class CreateUserPage extends StatelessWidget {
       child: CustomScaffold(
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Row(
               children: [
-                SizedBox(width: 8),
+                SizedBox(width: context.w(12)),
                 Image.asset(
                   AppImages.logo,
                   fit: BoxFit.contain,
-                  height: context.sp(13),
+                  height: context.sp(15),
                 ),
                 SizedBox(width: 10),
                 Text('Live Score', style: AppStyles.heading16(context)),
@@ -36,11 +37,11 @@ class CreateUserPage extends StatelessWidget {
             ),
             Spacer(),
             Text('Get Started !', style: AppStyles.heading18(context)),
-            SizedBox(height: context.h(10)),
+            Spacer(),
             UserImagesList(),
-            SizedBox(height: context.h(30)),
+            Spacer(flex: 2),
             UserNameTextField(),
-            SizedBox(height: context.h(10)),
+            Spacer(),
             BlocBuilder<ProfileCubit, ProfileState>(
               builder: (context, state) {
                 if (state is ProfileFailure) {
@@ -51,7 +52,7 @@ class CreateUserPage extends StatelessWidget {
                     ).copyWith(color: Colors.redAccent),
                   );
                 }
-                return SizedBox();
+                return Text(' ', style: AppStyles.body12(context));
               },
             ),
             Spacer(flex: 2),

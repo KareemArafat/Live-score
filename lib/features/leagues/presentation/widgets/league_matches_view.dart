@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:live_score_app/shard/entities/match_entity.dart';
-import 'package:live_score_app/shard/widgets/match_result_row.dart';
-import 'package:live_score_app/features/leagues/presentation/views/league_details_page.dart';
+import 'package:live_score_app/core/responsive_helpers/size_helper_extensions.dart';
+import 'package:live_score_app/core/theme/app_styles.dart';
+import 'package:live_score_app/core/widgets/custom_error_widget.dart';
+import 'package:live_score_app/core/widgets/custom_gradient_widget.dart';
 import 'package:live_score_app/core/widgets/custom_loading_widget.dart';
 import 'package:live_score_app/features/leagues/presentation/manager/league_matches_cubit/league_matches_cubit.dart';
+import 'package:live_score_app/features/leagues/presentation/views/league_details_page.dart';
+import 'package:live_score_app/shard/entities/league_entity.dart';
+import 'package:live_score_app/shard/widgets/match_result_row.dart';
 
 class LeagueMatchesView extends StatefulWidget {
   const LeagueMatchesView({super.key});
@@ -15,119 +19,85 @@ class LeagueMatchesView extends StatefulWidget {
 
 class _LeagueMatchesViewState extends State<LeagueMatchesView>
     with AutomaticKeepAliveClientMixin {
-  List<MatchEntity> matchesList = [];
   late LeagueMatchesCubit cubit;
-  late ScrollController scrollController;
-  String? previousPageUrl;
-  String? nextPageUrl;
-  bool isNextLoading = false;
-  bool isPreviousLoading = false;
+  late LeagueEntity leagueEntity;
 
   @override
   void initState() {
-    final league = context.read<LeagueEntityProvider>().league;
-    cubit = BlocProvider.of<LeagueMatchesCubit>(context)
-      ..getLeagueMatches(leagueId: league.leagueId);
-    scrollController = ScrollController(initialScrollOffset: 100)
-      ..addListener(controllerListener);
     super.initState();
-  }
-
-  @override
-  void dispose() {
-    scrollController.dispose();
-    super.dispose();
-  }
-
-  void controllerListener() async {
-    var currentIndex = scrollController.position.pixels;
-    var maxIndex = scrollController.position.maxScrollExtent;
-    var minIndex = scrollController.position.minScrollExtent;
-    if (currentIndex == minIndex &&
-        !isPreviousLoading &&
-        previousPageUrl != null) {
-      isPreviousLoading = true;
-      await cubit.getPreviousLeagueMatches(pageUrl: previousPageUrl!);
-      isPreviousLoading = false;
-    }
-    if (currentIndex >= 0.9 * maxIndex &&
-        nextPageUrl != null &&
-        !isNextLoading) {
-      isNextLoading = true;
-      await cubit.getNextLeagueMatches(pageUrl: nextPageUrl!);
-      isNextLoading = false;
-    }
-  }
-
-  void saveScrollPosition() {
-    final oldScrollHeight = scrollController.position.maxScrollExtent;
-    final oldOffset = scrollController.offset;
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      final newScrollHeight = scrollController.position.maxScrollExtent;
-      final scrollDiff = newScrollHeight - oldScrollHeight;
-      scrollController.jumpTo(oldOffset + scrollDiff + 220);
-    });
+    leagueEntity = context.read<LeagueEntityProvider>().leagueEntity;
+    cubit = context.read<LeagueMatchesCubit>()
+      ..getLeagueMatches(leagueId: leagueEntity.leagueId);
   }
 
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return BlocConsumer<LeagueMatchesCubit, LeagueMatchesState>(
-      listener: (context, state) async {
-        if (state is MatchesSuccess) {
-          matchesList = state.matchesList.gamesList!.reversed.toList();
-          if (matchesList.isNotEmpty && matchesList.length < 30) {
-            await cubit.getNextLeagueMatches(
-              pageUrl: state.matchesList.nextPage!,
-            );
-          }
-          previousPageUrl = state.matchesList.previousPage;
-          nextPageUrl = state.matchesList.nextPage;
-        } else if (state is PreviousMatchesSuccess) {
-          if (state.matchesList.gamesList == null) {
-            return previousPageUrl = null;
-          }
-          matchesList.insertAll(0, state.matchesList.gamesList!);
-          previousPageUrl = state.matchesList.previousPage;
-          saveScrollPosition();
-        } else if (state is NextMatchesSuccess) {
-          if (state.matchesList.gamesList == null) {
-            return nextPageUrl = null;
-          }
-          matchesList.addAll(state.matchesList.gamesList!);
-          nextPageUrl = state.matchesList.nextPage;
-        }
-      },
-      builder: (context, state) {
-        if (state is MatchesLoading) {
-          return CustomLoadingWidget();
-        } else if (state is MatchesFailure) {
-          return Center(child: Text(state.errorMess));
-        }
-        return ListView.builder(
-          controller: scrollController,
-          itemCount: matchesList.length + 2,
-          itemBuilder: (context, index) {
-            if (index == 0) {
-              return isPreviousLoading
-                  ? Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: const CustomLoadingWidget(size: -8),
-                    )
-                  : const SizedBox();
-            }
-            if (index == matchesList.length + 1) {
-              return isNextLoading
-                  ? Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: const CustomLoadingWidget(size: -8),
-                    )
-                  : const SizedBox(height: 10);
-            }
-            return MatchResultRow(match: matchesList[index - 1]);
-          },
-        );
-      },
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            CustomGradientWidget(
+              child: IconButton(
+                onPressed: () => cubit.getPreviousLeagueMatches(),
+                icon: Icon(
+                  Icons.arrow_circle_left_outlined,
+                  size: context.rMin(30),
+                ),
+              ),
+            ),
+            CustomGradientWidget(
+              child: IconButton(
+                onPressed: () => cubit.getNextLeagueMatches(),
+                icon: Icon(
+                  Icons.arrow_circle_right_outlined,
+                  size: context.rMin(30),
+                ),
+              ),
+            ),
+          ],
+        ),
+        SizedBox(height: context.h(6)),
+        Expanded(
+          child: BlocBuilder<LeagueMatchesCubit, LeagueMatchesState>(
+            builder: (context, state) {
+              if (state is MatchesSuccess) {
+                return ListView.builder(
+                  itemCount: state.leagueMatchesEntity.gamesList.length,
+                  itemBuilder: (context, index) => MatchResultRow(
+                    matchEntity: state.leagueMatchesEntity.gamesList[index],
+                  ),
+                );
+              } else if (state is MatchesNotAvailable) {
+                return Center(
+                  child: Text(
+                    'No Matches Available',
+                    style: AppStyles.body14(context),
+                  ),
+                );
+              } else if (state is MatchesFailure) {
+                return CustomErrorWidget(
+                  errorMess: state.errorMess,
+                  onPressed: () =>
+                      cubit.getLeagueMatches(leagueId: leagueEntity.leagueId),
+                );
+              } else if (state is PreviousMatchesFailure) {
+                return CustomErrorWidget(
+                  errorMess: state.errorMess,
+                  onPressed: () => cubit.getPreviousLeagueMatches(),
+                );
+              } else if (state is NextMatchesFailure) {
+                return CustomErrorWidget(
+                  errorMess: state.errorMess,
+                  onPressed: () => cubit.getNextLeagueMatches(),
+                );
+              }
+              return const CustomLoadingWidget();
+            },
+          ),
+        ),
+      ],
     );
   }
 

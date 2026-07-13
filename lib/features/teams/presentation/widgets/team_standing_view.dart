@@ -36,7 +36,7 @@ class _TeamStandingViewState extends State<TeamStandingView>
               if (index == 0) {
                 return TableDetailsBar();
               }
-              if (widget.teamId == tableRows[index - 1].team?.teamId) {
+              if (widget.teamId == tableRows[index - 1].team.teamId) {
                 return TableItem(
                   teamRow: tableRows[index - 1],
                   isSelected: true,

@@ -22,13 +22,13 @@ enum MatchStatusEnum {
   afterPenalties("After Penalties"),
   justEnded("Just Ended"),
   ended("Ended"),
-  canceled("Canceled"),
+  canceled("Cancelled"),
   postponed("Postponed"),
   fro("Final Result Only"),
   abandoned("Abandoned"),
-  suspend("Suspended");
+  suspend("Suspended"),
+  awarded("Awarded");
 
   final String value;
   const MatchStatusEnum(this.value);
 }
-

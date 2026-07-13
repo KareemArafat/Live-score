@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:live_score_app/core/responsive_helpers/size_helper_extensions.dart';
 import 'package:live_score_app/core/theme/app_colors.dart';
 import 'package:live_score_app/core/utils/app_routers.dart';
 import 'package:live_score_app/core/theme/app_styles.dart';
@@ -13,7 +14,7 @@ class TableItem extends StatelessWidget {
     this.textColor = Colors.white,
     this.isSelected = false,
   });
-  final RowEntity teamRow;
+  final TableRowEntity teamRow;
   final Color textColor;
   final bool isSelected;
 
@@ -23,14 +24,17 @@ class TableItem extends StatelessWidget {
       onTap: () =>
           GoRouter.of(context).push(AppRouters.teamPage, extra: teamRow.team),
       child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+        padding: EdgeInsets.symmetric(
+          vertical: context.h(8),
+          horizontal: context.w(12),
+        ),
         color: isSelected
             ? AppColors.grayColor.withAlpha(100)
             : Colors.transparent,
         child: Row(
           children: [
             SizedBox(
-              width: 15,
+              width: context.w(16),
               child: Center(
                 child: Text(
                   teamRow.teamRank.toString(),
@@ -38,22 +42,20 @@ class TableItem extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(width: 10),
-            CustomNetworkImage(imageUrl: teamRow.team!.teamImage, size: 15),
-            SizedBox(width: 5),
-            SizedBox(
-              width: 100,
-              child: Text(
-                teamRow.team!.teamName.length > 20
-                    ? "${teamRow.team!.teamName.substring(0, 15)}..."
-                    : teamRow.team!.teamName,
-                overflow: TextOverflow.ellipsis,
-                style: AppStyles.body10(context).copyWith(color: textColor),
-              ),
+            SizedBox(width: context.w(6)),
+            CustomNetworkImage(
+              imageUrl: teamRow.team.teamImage,
+              size: context.rMin(12),
+            ),
+            SizedBox(width: context.w(6)),
+            Text(
+              teamRow.team.teamName,
+              overflow: TextOverflow.ellipsis,
+              style: AppStyles.body10(context).copyWith(color: textColor),
             ),
             Spacer(),
             SizedBox(
-              width: 15,
+              width: context.w(20),
               child: Center(
                 child: Text(
                   teamRow.matchesNum.toString(),
@@ -61,29 +63,30 @@ class TableItem extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(width: 5),
             SizedBox(
-              width: 15,
+              width: context.w(20),
               child: Center(
                 child: Text(
                   teamRow.wins.toString(),
-                  style: AppStyles.body10(context).copyWith(color: Colors.green),
+                  style: AppStyles.body10(
+                    context,
+                  ).copyWith(color: Colors.green),
                 ),
               ),
             ),
-            SizedBox(width: 5),
             SizedBox(
-              width: 15,
+              width: context.w(20),
               child: Center(
                 child: Text(
                   teamRow.draws.toString(),
-                  style: AppStyles.body10(context).copyWith(color: Colors.yellow),
+                  style: AppStyles.body10(
+                    context,
+                  ).copyWith(color: Colors.yellow),
                 ),
               ),
             ),
-            SizedBox(width: 5),
             SizedBox(
-              width: 15,
+              width: context.w(20),
               child: Center(
                 child: Text(
                   teamRow.loses.toString(),
@@ -91,19 +94,17 @@ class TableItem extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(width: 5),
             SizedBox(
-              width: 35,
+              width: context.w(40),
               child: Center(
                 child: Text(
-                  ' ${teamRow.scored.toString()}/${teamRow.accepted.toString()} ',
+                  '${teamRow.scored}/${teamRow.accepted}',
                   style: AppStyles.body10(context).copyWith(color: textColor),
                 ),
               ),
             ),
-            SizedBox(width: 5),
             SizedBox(
-              width: 20,
+              width: context.w(20),
               child: Center(
                 child: Text(
                   teamRow.diff.toString(),
@@ -111,16 +112,14 @@ class TableItem extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(width: 5),
             SizedBox(
-              width: 20,
+              width: context.w(30),
               child: Center(
                 child: Text(
                   teamRow.totalPoints.toString(),
-                  style: AppStyles.body10(context).copyWith(
-                    color: textColor,
-                    fontWeight: FontWeight.w700,
-                  ),
+                  style: AppStyles.body10(
+                    context,
+                  ).copyWith(color: textColor, fontWeight: FontWeight.bold),
                 ),
               ),
             ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:live_score_app/core/responsive_helpers/size_helper_extensions.dart';
 import 'package:live_score_app/core/theme/app_styles.dart';
 import 'package:live_score_app/core/utils/app_routers.dart';
 import 'package:live_score_app/core/widgets/custom_network_image.dart';
@@ -20,7 +21,10 @@ class AllLeaguesListItem extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
         child: Row(
           children: [
-            CustomNetworkImage(imageUrl: leagueEntity.leagueImage, size: 30),
+            CustomNetworkImage(
+              imageUrl: leagueEntity.leagueImage,
+              size: context.rMin(32),
+            ),
             SizedBox(width: 10),
             Text(leagueEntity.leagueName, style: AppStyles.heading16(context)),
           ],

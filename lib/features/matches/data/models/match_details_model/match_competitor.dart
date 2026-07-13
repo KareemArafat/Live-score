@@ -1,4 +1,4 @@
-import 'package:live_score_app/features/matches/data/models/match_details_model/competitor_member.dart';
+import 'package:live_score_app/features/matches/data/models/match_details_model/competitor_lineups.dart';
 import 'package:live_score_app/features/matches/domain/entities/match_details_entity/lineup_entity.dart';
 import 'package:live_score_app/features/matches/domain/entities/match_details_entity/lineup_member_entity.dart';
 import 'package:live_score_app/features/matches/domain/entities/match_details_entity/member_entity.dart';
@@ -114,29 +114,3 @@ class MatchCompetitor {
   }
 }
 
-class CompetitorLineups {
-  CompetitorLineups({
-    required this.status,
-    required this.formation,
-    required this.hasFieldPositions,
-    required this.members,
-  });
-
-  final String? status;
-  final String? formation;
-  final bool? hasFieldPositions;
-  final List<CompetitorMember> members;
-
-  factory CompetitorLineups.fromJson(Map<String, dynamic> json) {
-    return CompetitorLineups(
-      status: json["status"],
-      formation: json["formation"],
-      hasFieldPositions: json["hasFieldPositions"],
-      members: json["members"] == null
-          ? []
-          : List<CompetitorMember>.from(
-              json["members"]!.map((x) => CompetitorMember.fromJson(x)),
-            ),
-    );
-  }
-}

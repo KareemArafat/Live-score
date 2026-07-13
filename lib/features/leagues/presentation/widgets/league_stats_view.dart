@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:live_score_app/core/theme/app_colors.dart';
+import 'package:live_score_app/core/responsive_helpers/size_helper_extensions.dart';
 import 'package:live_score_app/core/theme/app_styles.dart';
 import 'package:live_score_app/features/leagues/presentation/manager/League_players_stats_cubit/league_players_stats_cubit.dart';
 import 'package:live_score_app/features/leagues/presentation/views/league_details_page.dart';
@@ -8,6 +8,7 @@ import 'package:live_score_app/core/widgets/custom_gradient_border.dart';
 import 'package:live_score_app/features/leagues/presentation/manager/stats_avigation_cubit/stats_navigation_cubit.dart';
 import 'package:live_score_app/features/leagues/presentation/widgets/stats_assists_view.dart';
 import 'package:live_score_app/features/leagues/presentation/widgets/stats_goals_view.dart';
+import 'package:live_score_app/shard/entities/league_entity.dart';
 
 class LeagueStatsView extends StatefulWidget {
   const LeagueStatsView({super.key});
@@ -18,34 +19,29 @@ class LeagueStatsView extends StatefulWidget {
 
 class _LeagueStatsViewState extends State<LeagueStatsView>
     with AutomaticKeepAliveClientMixin, SingleTickerProviderStateMixin {
-  late TabController _tabController;
+  late TabController tabController;
+  late LeagueEntity leagueEntity;
 
   @override
   void initState() {
-    final league = context.read<LeagueEntityProvider>().league;
-
-    BlocProvider.of<LeaguePlayersStatsCubit>(
-      context,
-    ).getLeaguePlayersStats(leagueId: league.leagueId);
-    _tabController = TabController(length: 2, vsync: this);
+    tabController = TabController(length: 2, vsync: this)
+      ..addListener(() {
+        if (!tabController.indexIsChanging) {
+          context.read<StatsNavigationCubit>().navigateTo(
+            StatsTab.values[tabController.index],
+          );
+        }
+      });
+    leagueEntity = context.read<LeagueEntityProvider>().leagueEntity;
+    context.read<LeaguePlayersStatsCubit>().getLeaguePlayersStats(
+      leagueId: leagueEntity.leagueId,
+    );
     super.initState();
-
-    tabChange();
-  }
-
-  void tabChange() {
-    _tabController.addListener(() {
-      if (!_tabController.indexIsChanging) {
-        context.read<StatsNavigationCubit>().navigateTo(
-          StatsTab.values[_tabController.index],
-        );
-      }
-    });
   }
 
   @override
   void dispose() {
-    _tabController.dispose();
+    tabController.dispose();
     super.dispose();
   }
 
@@ -54,52 +50,60 @@ class _LeagueStatsViewState extends State<LeagueStatsView>
     super.build(context);
     return BlocBuilder<StatsNavigationCubit, StatsTab>(
       builder: (context, state) {
-        final currentIndex = state == StatsTab.goals ? 0 : 1;
-
-        if (_tabController.index != currentIndex) {
-          _tabController.animateTo(currentIndex);
+        final currentIndex = state.index;
+        if (tabController.index != currentIndex) {
+          WidgetsBinding.instance.addPostFrameCallback(
+            (_) => tabController.animateTo(currentIndex),
+          );
         }
 
-        return NestedScrollView(
-          headerSliverBuilder: (context, innerBoxIsScrolled) => [
-            SliverToBoxAdapter(
-              child: TabBar(
-                controller: _tabController,
-                onTap: (value) => context
-                    .read<StatsNavigationCubit>()
-                    .navigateTo(StatsTab.values[value]),
-                dividerColor: Colors.transparent,
-                overlayColor: WidgetStateProperty.all(Colors.transparent),
-                indicator: const BoxDecoration(),
-                tabs: [
-                  tabButton("Goals", state == StatsTab.goals),
-                  tabButton("Assists", state == StatsTab.assists),
+        return Column(
+          children: [
+            TabBar(
+              controller: tabController,
+              onTap: (value) => context.read<StatsNavigationCubit>().navigateTo(
+                StatsTab.values[value],
+              ),
+              dividerColor: Colors.transparent,
+              overlayColor: WidgetStateProperty.all(Colors.transparent),
+              indicator: const BoxDecoration(),
+              tabs: [
+                tabButton("Goals", state == StatsTab.goals),
+                tabButton("Assists", state == StatsTab.assists),
+              ],
+            ),
+            SizedBox(height: context.h(6)),
+            Expanded(
+              child: TabBarView(
+                controller: tabController,
+                children: [
+                  StatsGoalsView(leagueId: leagueEntity.leagueId),
+                  StatsAssistsView(leagueId: leagueEntity.leagueId),
                 ],
               ),
             ),
           ],
-          body: TabBarView(
-            controller: _tabController,
-            children: const [StatsGoalsView(), StatsAssistsView()],
-          ),
         );
       },
     );
   }
 
   Widget tabButton(String text, bool isSelected) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-      child: isSelected
-          ? CustomGradientBorder(
-              height: 40,
-              width: 300,
-              border: 8,
-              linearGradient: AppColors.blueGradient,
-              child: Center(child: Text(text, style: AppStyles.body14(context))),
-            )
-          : Text(text, style: AppStyles.body14(context)),
-    );
+    return isSelected
+        ? CustomGradientBorder(
+            width: context.screenWidth / 3,
+            border: 8,
+            child: Center(
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                  vertical: context.h(12),
+                  horizontal: context.w(12),
+                ),
+                child: Text(text, style: AppStyles.body14(context)),
+              ),
+            ),
+          )
+        : Text(text, style: AppStyles.body14(context));
   }
 
   @override

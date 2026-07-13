@@ -10,7 +10,7 @@ class LineupEntity {
   final List<LineupMemberEntity> line2;
   final List<LineupMemberEntity> line3;
   final List<LineupMemberEntity> line4;
-  final List<LineupMemberEntity>? line5;
+  final List<LineupMemberEntity> line5;
   final List<LineupMemberEntity>? substitutions;
 
   LineupEntity({

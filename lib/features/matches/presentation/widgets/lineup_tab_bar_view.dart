@@ -4,8 +4,8 @@ import 'package:live_score_app/core/theme/app_styles.dart';
 import 'package:live_score_app/features/matches/domain/entities/match_details_entity/events_entity.dart';
 import 'package:live_score_app/features/matches/domain/entities/match_details_entity/lineup_entity.dart';
 import 'package:live_score_app/features/matches/presentation/widgets/lineup_bench.dart';
+import 'package:live_score_app/features/matches/presentation/widgets/lineup_coach.dart';
 import 'package:live_score_app/features/matches/presentation/widgets/lineup_field.dart';
-import 'package:live_score_app/shard/widgets/player_image.dart';
 
 class LineupTabBarView extends StatelessWidget {
   const LineupTabBarView({
@@ -14,7 +14,7 @@ class LineupTabBarView extends StatelessWidget {
     required this.events,
   });
   final LineupEntity lineup;
-  final List<EventsEntity> events;
+  final List<EventEntity> events;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,10 @@ class LineupTabBarView extends StatelessWidget {
                     borderRadius: BorderRadius.circular(12),
                     gradient: AppColors.blueGradient,
                   ),
-                  child: Text(lineup.lineupStatus, style: AppStyles.body12(context)),
+                  child: Text(
+                    lineup.lineupStatus,
+                    style: AppStyles.body12(context),
+                  ),
                 ),
               ),
               LineupField(lineup: lineup, events: events),
@@ -45,32 +48,17 @@ class LineupTabBarView extends StatelessWidget {
                   children: [
                     Text('Formation', style: AppStyles.body12(context)),
                     Spacer(),
-                    Text(lineup.lineupFormation, style: AppStyles.body12(context)),
+                    Text(
+                      lineup.lineupFormation,
+                      style: AppStyles.body12(context),
+                    ),
                   ],
                 ),
               ),
               SizedBox(height: 50),
-              Container(
-                padding: EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12),
-                  gradient: AppColors.blueGradient,
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Coach', style: AppStyles.heading16(context)),
-                    ListTile(
-                      contentPadding: EdgeInsets.only(top: 10),
-                      visualDensity: VisualDensity(vertical: -4),
-                      leading: PlayerImage(image: lineup.coach.playerImage),
-                      title: Text(
-                        lineup.coach.playerName,
-                        style: AppStyles.body12(context),
-                      ),
-                    ),
-                  ],
-                ),
+              LineupCoach(
+                coachName: lineup.coach.playerImage,
+                coachImage: lineup.coach.playerName,
               ),
               SizedBox(height: 8),
               LineupBench(lineup: lineup, events: events),

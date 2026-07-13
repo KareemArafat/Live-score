@@ -11,7 +11,7 @@ class MatchDetailsEntity {
   final int awayTeamGoals;
   final int minutes;
   final String matchStatus;
-  final List<EventsEntity> events;
+  final List<EventEntity> events;
   final LineupEntity? homeLineUp;
   final LineupEntity? awayLineUp;
   final MatchInfoEntity info;

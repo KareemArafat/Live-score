@@ -33,7 +33,7 @@ class CustomErrorWidget extends StatelessWidget {
             disabledColor: AppColors.secColor2,
             onPressed: onPressed,
             icon: Icon(Icons.refresh),
-            iconSize: context.r(35),
+            iconSize: context.rMin(35),
             color: AppColors.secColor2,
           ),
         ],

@@ -1,7 +1,7 @@
 import 'package:live_score_app/core/api/api_const.dart';
 import 'package:live_score_app/features/leagues/data/models/league_stats_model/player_stats_info.dart';
 import 'package:live_score_app/features/leagues/data/models/league_stats_model/stat.dart';
-import 'package:live_score_app/features/leagues/domain/entities/league_stats_entity.dart';
+import 'package:live_score_app/features/leagues/domain/entities/league_stats_entity/league_player_states_entity.dart';
 
 class AthletesStatRow extends LeaguePlayersStatsEntity {
   final num? position;

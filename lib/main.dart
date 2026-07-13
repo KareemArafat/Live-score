@@ -7,15 +7,16 @@ import 'package:live_score_app/core/utils/cubit_observer.dart';
 import 'package:live_score_app/core/utils/functions.dart';
 import 'package:live_score_app/core/utils/service_locator.dart';
 import 'package:live_score_app/core/utils/shard_pref.dart';
-import 'package:live_score_app/features/fav%20teams/domain/repos/fav_teams_repo.dart';
-import 'package:live_score_app/features/fav%20teams/presentation/manager/manage_fav_teams_cubit/manage_fav_teams_cubit.dart';
+import 'package:live_score_app/features/fav_teams/domain/repos/fav_teams_repo.dart';
+import 'package:live_score_app/features/fav_teams/presentation/manager/manage_fav_teams_cubit/manage_fav_teams_cubit.dart';
 import 'package:live_score_app/features/search/domain/use_cases/search_use_case.dart';
 import 'package:live_score_app/features/search/presentation/manager/search%20result%20cubit/search_result_cubit.dart';
 
 void main() async {
-  Bloc.observer = CubitObserver();
-  setupGetIt();
+  WidgetsFlutterBinding.ensureInitialized();
   await setUpHive();
+  setupGetIt();
+  Bloc.observer = CubitObserver();
   final isSeen = await ShardPref.getOnBoarding();
   runApp(
     DevicePreview(
@@ -40,26 +41,20 @@ class LiveScoreApp extends StatelessWidget {
         ),
       ],
 
-      child: Builder(
-        builder: (context) {
-          return SizeProvider(
-            baseSize: Size(360, 800),
-            height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width,
-            child: MaterialApp.router(
-              routerConfig: AppRouters.router(isSeen),
-              debugShowCheckedModeBanner: false,
-              theme: ThemeData.dark().copyWith(
-                textTheme: ThemeData.dark().textTheme.apply(
-                  fontFamily: 'Poppins',
-                  bodyColor: Colors.white,
-                  displayColor: Colors.white,
-                ),
-                iconTheme: IconThemeData(color: Colors.white),
-              ),
+      child: SizeProvider(
+        baseSize: const Size(393, 852),
+        child: MaterialApp.router(
+          routerConfig: AppRouters.router(isSeen),
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData.dark().copyWith(
+            textTheme: ThemeData.dark().textTheme.apply(
+              fontFamily: 'Poppins',
+              bodyColor: Colors.white,
+              displayColor: Colors.white,
             ),
-          );
-        },
+            iconTheme: IconThemeData(color: Colors.white),
+          ),
+        ),
       ),
     );
   }

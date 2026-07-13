@@ -129,7 +129,7 @@ class _TeamMatchesViewState extends State<TeamMatchesView>
                     )
                   : const SizedBox(height: 10);
             }
-            return MatchResultRow(match: matches[index - 1]);
+            return MatchResultRow(matchEntity: matches[index - 1]);
           },
         );
       },

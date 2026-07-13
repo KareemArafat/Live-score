@@ -26,8 +26,8 @@ String leagueNameSplit(String name) {
 List<List<MatchEntity>> groupMatchesByLeague(List<MatchEntity> matches) {
   final Map<int, List<MatchEntity>> temp = {};
   for (var item in matches) {
-    if (AppConst.unLikedLeagues.contains(item.league.leagueId)) continue;
-    (temp[item.league.leagueId] ??= []).add(item);
+    if (AppConst.unLikedLeagues.contains(item.leagueId)) continue;
+    (temp[item.leagueId] ??= []).add(item);
   }
   return temp.values.toList();
 }
@@ -43,7 +43,7 @@ String getCountryImage(int id) {
   final Map countriesImagesMap = {
     for (var item in AppConst.countiesList) item['id']: item['isoCode'],
   };
-  return countriesImagesMap['id'];
+  return countriesImagesMap['id'] ?? '';
 }
 
 Future<void> openUrl({required String url}) async {

@@ -15,20 +15,23 @@ class AllLeaguesList extends StatelessWidget {
       builder: (context, state) {
         if (state is AllLeaguesSuccess) {
           final List<LeagueEntity> leaguesList = state.leaguesList;
-          return ListView.builder(
-            itemCount: leaguesList.length,
-            itemBuilder: (context, index) {
-              return AllLeaguesListItem(leagueEntity: leaguesList[index]);
-            },
+          return SliverList(
+            delegate: SliverChildBuilderDelegate(
+              childCount: leaguesList.length,
+              (context, index) =>
+                  AllLeaguesListItem(leagueEntity: leaguesList[index]),
+            ),
           );
         }
         if (state is AllLeaguesFailure) {
-          return CustomErrorWidget(
-            errorMess: state.errorMess,
-            onPressed: () => context.read<AllLeaguesCubit>().getAllLeagues(),
+          return SliverFillRemaining(
+            child: CustomErrorWidget(
+              errorMess: state.errorMess,
+              onPressed: () => context.read<AllLeaguesCubit>().getAllLeagues(),
+            ),
           );
         } else {
-          return CustomLoadingWidget();
+          return SliverFillRemaining(child: CustomLoadingWidget());
         }
       },
     );

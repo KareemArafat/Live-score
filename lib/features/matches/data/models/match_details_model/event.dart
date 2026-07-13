@@ -54,8 +54,8 @@ class Event {
     );
   }
 
-  EventsEntity toEntity(Map<int, MemberEntity> members) {
-    return EventsEntity(
+  EventEntity toEntity(Map<int, MemberEntity> members) {
+    return EventEntity(
       teamId: competitorId ?? 0,
       playerId: members[memberId]!.playerId,
       playerName: members[memberId]!.playerShortName,

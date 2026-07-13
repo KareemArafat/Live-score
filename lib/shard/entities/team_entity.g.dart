@@ -20,19 +20,21 @@ class TeamEntityAdapter extends TypeAdapter<TeamEntity> {
       teamId: fields[0] as int,
       teamName: fields[1] as String,
       teamImage: fields[2] as String,
-      countryId: fields[3] as int?,
-      countryName: fields[4] as String?,
-      countryImage: fields[5] as String?,
-      leagueId: fields[6] as int?,
-      leagueName: fields[7] as String?,
-      leagueImage: fields[8] as String?,
+      isNational: fields[3] as bool,
+      nationalRank: fields[4] as int,
+      countryId: fields[5] as int,
+      countryName: fields[6] as String,
+      countryImage: fields[7] as String,
+      leagueId: fields[8] as int?,
+      leagueName: fields[9] as String?,
+      leagueImage: fields[10] as String?,
     );
   }
 
   @override
   void write(BinaryWriter writer, TeamEntity obj) {
     writer
-      ..writeByte(9)
+      ..writeByte(11)
       ..writeByte(0)
       ..write(obj.teamId)
       ..writeByte(1)
@@ -40,16 +42,20 @@ class TeamEntityAdapter extends TypeAdapter<TeamEntity> {
       ..writeByte(2)
       ..write(obj.teamImage)
       ..writeByte(3)
-      ..write(obj.countryId)
+      ..write(obj.isNational)
       ..writeByte(4)
-      ..write(obj.countryName)
+      ..write(obj.nationalRank)
       ..writeByte(5)
-      ..write(obj.countryImage)
+      ..write(obj.countryId)
       ..writeByte(6)
-      ..write(obj.leagueId)
+      ..write(obj.countryName)
       ..writeByte(7)
-      ..write(obj.leagueName)
+      ..write(obj.countryImage)
       ..writeByte(8)
+      ..write(obj.leagueId)
+      ..writeByte(9)
+      ..write(obj.leagueName)
+      ..writeByte(10)
       ..write(obj.leagueImage);
   }
 

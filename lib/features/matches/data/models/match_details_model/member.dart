@@ -2,6 +2,15 @@ import 'package:live_score_app/core/api/api_const.dart';
 import 'package:live_score_app/features/matches/domain/entities/match_details_entity/member_entity.dart';
 
 class Member extends MemberEntity {
+  final int? competitorId;
+  final int? id;
+  final int? athleteId;
+  final String? name;
+  final String? shortName;
+  final int? jerseyNumber;
+  final String? nameForUrl;
+  final int? imageVersion;
+
   Member({
     required this.competitorId,
     required this.id,
@@ -12,23 +21,14 @@ class Member extends MemberEntity {
     required this.nameForUrl,
     required this.imageVersion,
   }) : super(
-         memberId: id ?? 0,
-         teamId: competitorId ?? 0,
-         playerId: athleteId ?? 0,
-         playerName: name ?? '',
-         playerShortName: shortName ?? '',
-         playerImage: ApiConst.playerTeamImage(athleteId ?? 0),
+         memberId: id!,
+         teamId: competitorId!,
+         playerId: athleteId!,
+         playerName: name!,
+         playerShortName: shortName ?? name,
+         playerImage: ApiConst.playerTeamImage(athleteId),
          number: jerseyNumber,
        );
-
-  final int? competitorId;
-  final int? id;
-  final int? athleteId;
-  final String? name;
-  final String? shortName;
-  final int? jerseyNumber;
-  final String? nameForUrl;
-  final int? imageVersion;
 
   factory Member.fromJson(Map<String, dynamic> json) {
     return Member(

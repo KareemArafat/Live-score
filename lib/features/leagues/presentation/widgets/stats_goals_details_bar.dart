@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:live_score_app/core/responsive_helpers/size_helper_extensions.dart';
 import 'package:live_score_app/core/theme/app_styles.dart';
 
 class StatsGoalsDetailsBar extends StatelessWidget {
@@ -7,21 +8,28 @@ class StatsGoalsDetailsBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 10),
+      padding: EdgeInsets.only(bottom: context.h(12)),
       child: Row(
         children: [
-          SizedBox(width: 15, child: Text('#', style: AppStyles.grayBody12(context))),
-          SizedBox(width: 5),
+          SizedBox(
+            width: context.w(16),
+            child: Text('#', style: AppStyles.grayBody12(context)),
+          ),
+          SizedBox(width: context.w(6)),
           Text('Name', style: AppStyles.grayBody12(context)),
           Spacer(),
           SizedBox(
-            width: 40,
-            child: Center(child: Text('Goal', style: AppStyles.grayBody12(context))),
+            width: context.w(50),
+            child: Center(
+              child: Text('Goal', style: AppStyles.grayBody12(context)),
+            ),
           ),
-          SizedBox(width: 5),
+          SizedBox(width: context.w(6)),
           SizedBox(
-            width: 50,
-            child: Center(child: Text('Penalty', style: AppStyles.grayBody12(context))),
+            width: context.w(50),
+            child: Center(
+              child: Text('Penalty', style: AppStyles.grayBody12(context)),
+            ),
           ),
         ],
       ),

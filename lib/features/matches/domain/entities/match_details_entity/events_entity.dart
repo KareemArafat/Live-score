@@ -1,4 +1,4 @@
-class EventsEntity {
+class EventEntity {
   final int teamId;
   final int playerId;
   final String playerName;
@@ -10,7 +10,7 @@ class EventsEntity {
   final String? eventDetails;
   final int time;
 
-  EventsEntity({
+  EventEntity({
     required this.teamId,
     required this.playerId,
     required this.playerName,

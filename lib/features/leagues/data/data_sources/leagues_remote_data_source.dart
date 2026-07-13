@@ -1,16 +1,16 @@
 import 'package:live_score_app/core/api/api_const.dart';
 import 'package:live_score_app/core/api/api_service.dart';
-import 'package:live_score_app/shard/models/matches_model/matches_model.dart';
 import 'package:live_score_app/features/leagues/data/models/league_stats_model/league_stats_model.dart';
+import 'package:live_score_app/shard/models/matches_list_model/matches_list_model.dart';
 import 'package:live_score_app/shard/models/table_model.dart/table_model.dart';
 import 'package:live_score_app/shard/models/news_model/news_model.dart';
-import 'package:live_score_app/features/leagues/data/models/league_model/league_model.dart';
+import 'package:live_score_app/shard/models/league_model.dart';
 
 abstract class LeaguesRemoteDataSource {
   Future<List<LeagueModel>> getAllLeagues();
   Future<TableModel> getLeagueTable({required int leagueId, int? season});
-  Future<MatchesModel> getLeagueMatches({required int leagueId});
-  Future<MatchesModel> getMoreLeagueMatches({required String pageUrl});
+  Future<MatchesListModel> getLeagueMatches({required int leagueId});
+  Future<MatchesListModel> getMoreLeagueMatches({required String pageUrl});
   Future<LeagueStatsModel> getLeaguePlayersStats({required int leagueId});
   Future<NewsModel> getLeagueNews({required int leagueId});
 }
@@ -43,19 +43,21 @@ class LeaguesRemoteDataSourceImpl extends LeaguesRemoteDataSource {
   }
 
   @override
-  Future<MatchesModel> getLeagueMatches({required int leagueId}) async {
+  Future<MatchesListModel> getLeagueMatches({required int leagueId}) async {
     var response = await _apiServices.get(
       endPoint: ApiConst.leagueMatchesEndPoint(leagueId),
     );
-    return MatchesModel.fromJson(response);
+    return MatchesListModel.fromJson(response);
   }
 
   @override
-  Future<MatchesModel> getMoreLeagueMatches({required String pageUrl}) async {
+  Future<MatchesListModel> getMoreLeagueMatches({
+    required String pageUrl,
+  }) async {
     var response = await _apiServices.get(
       endPoint: ApiConst.leagueMoreMatchesEndPoint(pageUrl),
     );
-    return MatchesModel.fromJson(response);
+    return MatchesListModel.fromJson(response);
   }
 
   @override

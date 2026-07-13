@@ -1,14 +1,14 @@
 import 'package:live_score_app/core/api/api_const.dart';
 import 'package:live_score_app/core/api/api_service.dart';
 import 'package:live_score_app/features/teams/data/models/squad_model/squad_model.dart';
-import 'package:live_score_app/shard/models/matches_model/matches_model.dart';
+import 'package:live_score_app/shard/models/matches_list_model/matches_list_model.dart';
 import 'package:live_score_app/shard/models/table_model.dart/table_model.dart';
 import 'package:live_score_app/shard/models/news_model/news_model.dart';
 
 abstract class TeamRemoteDataSource {
   Future<SquadModel> getSquadPlayers({required int teamId});
-  Future<MatchesModel> getTeamMatches({required int teamId});
-  Future<MatchesModel> getMoreTeamMatches({required String pageUrl});
+  Future<MatchesListModel> getTeamMatches({required int teamId});
+  Future<MatchesListModel> getMoreTeamMatches({required String pageUrl});
   Future<TableModel> getTeamStanding({
     required int teamId,
     required int? leagueId,
@@ -29,19 +29,19 @@ class TeamRemoteDataSourceImpl extends TeamRemoteDataSource {
   }
 
   @override
-  Future<MatchesModel> getTeamMatches({required int teamId}) async {
+  Future<MatchesListModel> getTeamMatches({required int teamId}) async {
     var response = await _apiServices.get(
       endPoint: ApiConst.teamMatchesEndPoint(teamId),
     );
-    return MatchesModel.fromJson(response);
+    return MatchesListModel.fromJson(response);
   }
 
   @override
-  Future<MatchesModel> getMoreTeamMatches({required String pageUrl}) async {
+  Future<MatchesListModel> getMoreTeamMatches({required String pageUrl}) async {
     final response = await _apiServices.get(
       endPoint: 'https://webws.365scores.com$pageUrl ',
     );
-    return MatchesModel.fromJson(response);
+    return MatchesListModel.fromJson(response);
   }
 
   @override

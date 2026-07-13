@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:live_score_app/core/theme/app_styles.dart';
+import 'package:live_score_app/features/leagues/presentation/views/league_details_page.dart';
 import 'package:live_score_app/features/leagues/presentation/widgets/league_matches_view.dart';
 import 'package:live_score_app/features/leagues/presentation/widgets/league_news_view.dart';
 import 'package:live_score_app/features/leagues/presentation/widgets/league_stats_view.dart';
 import 'package:live_score_app/features/leagues/presentation/widgets/league_table_view.dart';
+import 'package:live_score_app/shard/entities/league_entity.dart';
+import 'package:provider/provider.dart';
 
 class LeagueTapBar extends StatefulWidget {
   const LeagueTapBar({super.key});
@@ -14,17 +17,27 @@ class LeagueTapBar extends StatefulWidget {
 
 class _LeagueTapBarState extends State<LeagueTapBar>
     with SingleTickerProviderStateMixin {
-  late TabController _tabController;
+  late LeagueEntity leagueEntity;
+  late TabController tabController;
+
+  int tabsNum() {
+    return leagueEntity.standings && leagueEntity.stats
+        ? 4
+        : leagueEntity.standings || leagueEntity.stats
+        ? 3
+        : 2;
+  }
 
   @override
   void initState() {
-    _tabController = TabController(length: 4, vsync: this);
+    leagueEntity = context.read<LeagueEntityProvider>().leagueEntity;
+    tabController = TabController(length: tabsNum(), vsync: this);
     super.initState();
   }
 
   @override
   void dispose() {
-    _tabController.dispose();
+    tabController.dispose();
     super.dispose();
   }
 
@@ -38,14 +51,28 @@ class _LeagueTapBarState extends State<LeagueTapBar>
           unselectedLabelStyle: AppStyles.body14(context),
           labelStyle: AppStyles.body14(context),
           tabAlignment: TabAlignment.center,
-          padding: const EdgeInsets.only(top: 20, bottom: 10),
+          padding: const EdgeInsets.symmetric(vertical: 10),
           isScrollable: true,
-          controller: _tabController,
-          tabs: const [
-            Padding(padding: EdgeInsets.all(8), child: Text('Table')),
-            Padding(padding: EdgeInsets.all(8), child: Text('Matches')),
-            Padding(padding: EdgeInsets.all(8), child: Text('Stats')),
-            Padding(padding: EdgeInsets.all(8), child: Text('News')),
+          controller: tabController,
+          tabs: [
+            if (leagueEntity.standings)
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                child: Text('Table'),
+              ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+              child: Text('Matches'),
+            ),
+            if (leagueEntity.stats)
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                child: Text('Stats'),
+              ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+              child: Text('News'),
+            ),
           ],
           indicator: BoxDecoration(
             color: Colors.transparent,
@@ -55,11 +82,11 @@ class _LeagueTapBarState extends State<LeagueTapBar>
         ),
         Expanded(
           child: TabBarView(
-            controller: _tabController,
-            children: const [
-              LeagueTableView(),
+            controller: tabController,
+            children: [
+              if (leagueEntity.standings) LeagueTableView(),
               LeagueMatchesView(),
-              LeagueStatsView(),
+              if (leagueEntity.stats) LeagueStatsView(),
               LeagueNewsView(),
             ],
           ),

@@ -2,11 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:live_score_app/core/utils/service_locator.dart';
+import 'package:live_score_app/core/widgets/custom_app_bar.dart';
 import 'package:live_score_app/features/leagues/domain/use_cases/get_league_news_use_case.dart';
 import 'package:live_score_app/features/leagues/domain/use_cases/get_more_league_matches_use_case.dart';
 import 'package:live_score_app/features/leagues/presentation/manager/league_news_cubit/league_news_cubit.dart';
 import 'package:live_score_app/core/widgets/custom_scaffold.dart';
-import 'package:live_score_app/features/search/presentation/widgets/search_field.dart';
 import 'package:live_score_app/shard/entities/league_entity.dart';
 import 'package:live_score_app/features/leagues/domain/use_cases/get_league_matches_use_case.dart';
 import 'package:live_score_app/features/leagues/domain/use_cases/get_league_table_use_case.dart';
@@ -20,8 +20,8 @@ import 'package:live_score_app/features/leagues/presentation/widgets/league_tap_
 import 'package:provider/provider.dart';
 
 class LeagueDetailsPage extends StatelessWidget {
-  const LeagueDetailsPage({super.key, required this.league});
-  final LeagueEntity league;
+  const LeagueDetailsPage({super.key, required this.leagueEntity});
+  final LeagueEntity leagueEntity;
 
   @override
   Widget build(BuildContext context) {
@@ -47,17 +47,14 @@ class LeagueDetailsPage extends StatelessWidget {
         ),
       ],
       child: ChangeNotifierProvider(
-        create: (context) => LeagueEntityProvider(league),
+        create: (context) => LeagueEntityProvider(leagueEntity),
         child: CustomScaffold(
-          appBar: AppBar(
-            backgroundColor: Colors.transparent,
-            title: SearchField(),
-          ),
-          body: Column(
-            children: [
-              LeaguePageTitle(),
-              Expanded(child: LeagueTapBar()),
+          body: NestedScrollView(
+            headerSliverBuilder: (context, innerBoxIsScrolled) => [
+              SliverToBoxAdapter(child: CustomAppBar()),
+              SliverToBoxAdapter(child: LeaguePageTitle()),
             ],
+            body: LeagueTapBar(),
           ),
         ),
       ),
@@ -66,13 +63,13 @@ class LeagueDetailsPage extends StatelessWidget {
 }
 
 class LeagueEntityProvider extends ChangeNotifier {
-  LeagueEntity league;
+  LeagueEntity leagueEntity;
   List? seasons;
 
-  LeagueEntityProvider(this.league);
+  LeagueEntityProvider(this.leagueEntity);
 
-  void setSeasons(List newSeasons) {
-    seasons = newSeasons;
+  void setSeasons(List seasonsList) {
+    seasons = seasonsList;
     notifyListeners();
   }
 }

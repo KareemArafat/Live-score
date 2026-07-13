@@ -1,32 +1,42 @@
 import 'package:flutter/material.dart';
-import 'package:live_score_app/core/theme/app_styles.dart';
+import 'package:live_score_app/core/responsive_helpers/size_helper_extensions.dart';
 
 class LineupPlayerScore extends StatelessWidget {
-  const LineupPlayerScore({super.key, required this.image, required this.num});
+  const LineupPlayerScore({
+    super.key,
+    required this.image,
+    required this.num,
+    required this.isLeft,
+  });
   final String image;
   final int num;
+  final bool isLeft;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(
-        horizontal: num > 1 ? 3 : 2,
-        vertical: num > 1 ? 0 : 2,
-      ),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(20),
-      ),
-      child: Row(
-        children: [
-          if (num > 1)
-            Text(
-              num.toString(),
-              style: AppStyles.body10(context).copyWith(color: Colors.black),
+    final imageSize = context.rMin(15);
+    final overlap = context.rMin(6);
+    return SizedBox(
+      width: imageSize + ((num - 1) * overlap),
+      height: imageSize,
+      child: Stack(
+        children: List.generate(
+          num,
+          (index) => Positioned(
+            left: isLeft ? index * overlap : null,
+            right: isLeft ? null : index * overlap,
+            child: Container(
+              padding: EdgeInsets.all(context.rMin(2)),
+              height: imageSize,
+              width: imageSize,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                shape: BoxShape.circle,
+              ),
+              child: Image.asset(image),
             ),
-          if (num > 1) SizedBox(width: 2),
-          Row(children: [Image.asset(image, height: 10)]),
-        ],
+          ),
+        ),
       ),
     );
   }

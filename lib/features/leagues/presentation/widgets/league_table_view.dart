@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:live_score_app/core/responsive_helpers/size_helper_extensions.dart';
+import 'package:live_score_app/core/widgets/custom_error_widget.dart';
 import 'package:live_score_app/features/leagues/presentation/manager/league_table_cubit/league_table_cubit.dart';
 import 'package:live_score_app/features/leagues/presentation/views/league_details_page.dart';
+import 'package:live_score_app/shard/entities/league_entity.dart';
 import 'package:live_score_app/shard/widgets/table_details_bar.dart';
 import 'package:live_score_app/core/widgets/custom_loading_widget.dart';
 import 'package:live_score_app/shard/widgets/table_item.dart';
@@ -15,12 +18,14 @@ class LeagueTableView extends StatefulWidget {
 
 class _LeagueTableViewState extends State<LeagueTableView>
     with AutomaticKeepAliveClientMixin {
+  late LeagueTableCubit cubit;
+  late LeagueEntity leagueEntity;
+
   @override
   void initState() {
-    final league = context.read<LeagueEntityProvider>().league;
-    BlocProvider.of<LeagueTableCubit>(
-      context,
-    ).getLeagueTable(leagueId: league.leagueId, season: null);
+    leagueEntity = context.read<LeagueEntityProvider>().leagueEntity;
+    cubit = BlocProvider.of<LeagueTableCubit>(context)
+      ..getLeagueTable(leagueId: leagueEntity.leagueId, season: null);
     super.initState();
   }
 
@@ -39,7 +44,7 @@ class _LeagueTableViewState extends State<LeagueTableView>
           setSeasonsList(state.table.seasons);
           final tableList = state.table.rows;
           return ListView.builder(
-            padding: EdgeInsets.only(top: 12),
+            padding: EdgeInsets.only(top: context.h(20)),
             itemCount: tableList.length + 1,
             itemBuilder: (context, index) {
               if (index == 0) {
@@ -49,7 +54,13 @@ class _LeagueTableViewState extends State<LeagueTableView>
             },
           );
         } else if (state is TableFailure) {
-          return Center(child: Text(state.errorMess));
+          return CustomErrorWidget(
+            errorMess: state.errorMess,
+            onPressed: () => cubit.getLeagueTable(
+              leagueId: leagueEntity.leagueId,
+              season: leagueEntity.seasonNum,
+            ),
+          );
         } else {
           return CustomLoadingWidget();
         }

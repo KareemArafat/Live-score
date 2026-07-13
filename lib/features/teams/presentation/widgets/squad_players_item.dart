@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:live_score_app/core/responsive_helpers/size_helper_extensions.dart';
 import 'package:live_score_app/core/theme/app_styles.dart';
 import 'package:live_score_app/features/teams/domain/entities/squad_player_entity.dart';
 import 'package:live_score_app/core/widgets/custom_network_image.dart';
@@ -19,7 +20,11 @@ class SquadPlayersItem extends StatelessWidget {
       contentPadding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
       visualDensity: const VisualDensity(vertical: -4),
       dense: true,
-      leading: PlayerImage(image: player.playerPhoto, isCoach: isCoach),
+      leading: PlayerImage(
+        image: player.playerPhoto,
+        isCoach: isCoach,
+        radius: context.rMin(15),
+      ),
       title: Text(
         player.playerName,
         style: AppStyles.body12(context).copyWith(fontWeight: FontWeight.w500),
@@ -32,7 +37,10 @@ class SquadPlayersItem extends StatelessWidget {
         ],
       ),
       trailing: player.playerNumber != 0
-          ? Text(player.playerNumber.toString(), style: AppStyles.body12(context))
+          ? Text(
+              player.playerNumber.toString(),
+              style: AppStyles.body12(context),
+            )
           : null,
     );
   }

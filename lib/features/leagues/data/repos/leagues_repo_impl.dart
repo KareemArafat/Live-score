@@ -4,7 +4,7 @@ import 'package:live_score_app/core/errors/failure.dart';
 import 'package:live_score_app/features/leagues/data/data_sources/leagues_remote_data_source.dart';
 import 'package:live_score_app/shard/entities/league_entity.dart';
 import 'package:live_score_app/shard/entities/league_matches_entity.dart';
-import 'package:live_score_app/features/leagues/domain/entities/league_stats_entity.dart';
+import 'package:live_score_app/features/leagues/domain/entities/league_stats_entity/league_stats_entity.dart';
 import 'package:live_score_app/shard/entities/news_entity.dart';
 import 'package:live_score_app/shard/entities/table_entity.dart';
 import 'package:live_score_app/features/leagues/domain/repos/leagues_repo.dart';

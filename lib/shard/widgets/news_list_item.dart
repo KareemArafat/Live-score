@@ -1,49 +1,46 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:live_score_app/core/responsive_helpers/size_helper_extensions.dart';
 import 'package:live_score_app/core/theme/app_colors.dart';
 import 'package:live_score_app/core/theme/app_styles.dart';
 import 'package:live_score_app/core/utils/functions.dart';
 import 'package:live_score_app/shard/entities/news_entity.dart';
-import 'package:live_score_app/core/widgets/custom_loading_widget.dart';
 
 class NewsListItem extends StatelessWidget {
-  const NewsListItem({super.key, required this.news});
-  final NewsEntity news;
+  const NewsListItem({super.key, required this.newsEntity});
+  final NewsEntity newsEntity;
 
   @override
   Widget build(BuildContext context) {
-    DateTime? parsedDate = DateTime.parse(news.date);
+    DateTime parsedDate = DateTime.parse(newsEntity.date);
     String formattedDate = DateFormat('dd/MM/yyyy  hh:mm a').format(parsedDate);
 
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 30),
+      padding: EdgeInsets.symmetric(vertical: context.h(30)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(12),
-            child: AspectRatio(
-              aspectRatio: 2 / 1.2,
-              child: CachedNetworkImage(
-                imageUrl: news.image,
-                fit: BoxFit.fill,
-                placeholder: (context, url) => Container(
-                  color: AppColors.grayColor,
-                  child: CustomLoadingWidget(size: 10),
-                ),
-                errorWidget: (context, url, error) => Container(
-                  color: AppColors.grayColor,
-                  child: Icon(Icons.image_not_supported_outlined),
+            child: Container(
+              color: AppColors.grayColor,
+              child: AspectRatio(
+                aspectRatio: 2 / 1.2,
+                child: CachedNetworkImage(
+                  imageUrl: newsEntity.image,
+                  fit: BoxFit.cover,
+                  errorWidget: (context, url, error) =>
+                      Icon(Icons.image_not_supported_outlined),
                 ),
               ),
             ),
           ),
           SizedBox(height: 10),
           InkWell(
-            onTap: () => openUrl(url: news.url),
+            onTap: () => openUrl(url: newsEntity.url),
             child: Text(
-              news.title,
+              newsEntity.title,
               style: AppStyles.heading16(context).copyWith(
                 fontWeight: FontWeight.w500,
                 decoration: TextDecoration.underline,
@@ -53,7 +50,7 @@ class NewsListItem extends StatelessWidget {
           SizedBox(height: 10),
           Row(
             children: [
-              Text(news.source, style: AppStyles.grayBody10(context)),
+              Text(newsEntity.source, style: AppStyles.grayBody10(context)),
               Spacer(),
               Text(formattedDate, style: AppStyles.grayBody10(context)),
             ],

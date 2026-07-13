@@ -4,6 +4,7 @@ class LineupMemberEntity {
   final int teamId;
   final int playerId;
   final String playerName;
+  final String playerShortName;
   final String playerImage;
   final int playerNum;
   final double rate;
@@ -20,6 +21,7 @@ class LineupMemberEntity {
     required this.teamId,
     required this.playerId,
     required this.playerName,
+    required this.playerShortName,
     required this.playerImage,
     required this.playerNum,
     required this.rate,
@@ -33,7 +35,9 @@ class LineupMemberEntity {
 
   int getStat(String name) {
     for (final stat in memberStats) {
-      if (stat.statName == name) return int.parse(stat.statValue);
+      if (stat.statName == name) {
+        return int.parse(stat.statValue.split('(').first);
+      }
     }
     return 0;
   }

@@ -6,12 +6,11 @@ import 'package:live_score_app/core/theme/app_images.dart';
 import 'package:live_score_app/core/theme/app_styles.dart';
 import 'package:live_score_app/core/widgets/custom_gradient_widget.dart';
 import 'package:live_score_app/core/widgets/custom_scaffold.dart';
-import 'package:live_score_app/features/day%20matches/presentation/views/day_matches_page.dart';
-import 'package:live_score_app/features/fav%20teams/presentation/manager/manage_fav_teams_cubit/manage_fav_teams_cubit.dart';
-import 'package:live_score_app/features/fav%20teams/presentation/views/fav_page.dart';
+import 'package:live_score_app/features/day_matches/presentation/views/day_matches_page.dart';
+import 'package:live_score_app/features/fav_teams/presentation/manager/manage_fav_teams_cubit/manage_fav_teams_cubit.dart';
+import 'package:live_score_app/features/fav_teams/presentation/views/fav_page.dart';
 import 'package:live_score_app/features/leagues/presentation/views/all_leagues_page.dart';
-import 'package:live_score_app/features/search/presentation/widgets/search_field.dart';
-import 'package:live_score_app/features/slider%20menu/presentation/views/slider_menu.dart';
+import 'package:live_score_app/features/slider_menu/presentation/views/slider_menu.dart';
 
 class PageNavigationBar extends StatefulWidget {
   const PageNavigationBar({super.key});
@@ -58,12 +57,6 @@ class _PageNavigationBarState extends State<PageNavigationBar> {
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
-      appBar: AppBar(
-        iconTheme: const IconThemeData(color: Colors.white),
-        scrolledUnderElevation: 0,
-        backgroundColor: Colors.transparent,
-        title: SearchField(),
-      ),
       drawer: SliderMenu(),
       body: IndexedStack(
         index: currentIndex,
@@ -87,7 +80,7 @@ class _PageNavigationBarState extends State<PageNavigationBar> {
               icon: _barItem(AppImages.matches, 'Matches', context),
               activeIcon: CustomGradientWidget(
                 linearGradient: AppColors.blueGradient,
-                widget: _barItem(AppImages.matches, 'Matches', context),
+                child: _barItem(AppImages.matches, 'Matches', context),
               ),
               label: "",
             ),
@@ -95,7 +88,7 @@ class _PageNavigationBarState extends State<PageNavigationBar> {
               icon: _barItem(AppImages.leagues, 'Leagues', context),
               activeIcon: CustomGradientWidget(
                 linearGradient: AppColors.blueGradient,
-                widget: _barItem(AppImages.leagues, 'Leagues', context),
+                child: _barItem(AppImages.leagues, 'Leagues', context),
               ),
               label: "",
             ),
@@ -103,7 +96,7 @@ class _PageNavigationBarState extends State<PageNavigationBar> {
               icon: _barItem(AppImages.fav, 'Favorites', context),
               activeIcon: CustomGradientWidget(
                 linearGradient: AppColors.blueGradient,
-                widget: _barItem(AppImages.fav, 'Favorites', context),
+                child: _barItem(AppImages.fav, 'Favorites', context),
               ),
               label: "",
             ),
@@ -117,8 +110,8 @@ class _PageNavigationBarState extends State<PageNavigationBar> {
     return Column(
       children: [
         SizedBox(height: 2),
-        Image.asset(image, height: context.r(30)),
-        Text(label, style: AppStyles.body14(context)),
+        Image.asset(image, height: context.rMin(25)),
+        Text(label, style: AppStyles.body10(context)),
       ],
     );
   }

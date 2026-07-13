@@ -35,4 +35,8 @@ abstract class AppImages {
   static const user6 = 'assets/users/user6.png';
   static const user7 = 'assets/users/user7.png';
   static const user8 = 'assets/users/user8.png';
+
+  static const onBoarding1 = 'assets/onboarding/onboarding1.jpg';
+  static const onBoarding2 = 'assets/onboarding/onboarding2.jpg';
+  static const onBoarding3 = 'assets/onboarding/onboarding3.jpg';
 }

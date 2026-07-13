@@ -8,37 +8,89 @@ part 'league_matches_state.dart';
 
 class LeagueMatchesCubit extends Cubit<LeagueMatchesState> {
   LeagueMatchesCubit(
-    this.getLeagueMatchesUseCase,
-    this.getMoreLeagueMatchesUseCase,
+    this._getLeagueMatchesUseCase,
+    this._getMoreLeagueMatchesUseCase,
   ) : super(MatchesInitial());
 
-  final GetLeagueMatchesUseCase getLeagueMatchesUseCase;
-  final GetMoreLeagueMatchesUseCase getMoreLeagueMatchesUseCase;
+  final GetLeagueMatchesUseCase _getLeagueMatchesUseCase;
+  final GetMoreLeagueMatchesUseCase _getMoreLeagueMatchesUseCase;
+  final List<LeagueMatchesEntity> pages = [];
+  int index = 0;
+  bool endNext = false;
+  bool endPrevious = false;
 
   Future<void> getLeagueMatches({required int leagueId}) async {
     emit(MatchesLoading());
-    var result = await getLeagueMatchesUseCase.execute(leagueId: leagueId);
-    result.fold(
-      (l) => emit(MatchesFailure(errorMess: l.errMessage)),
-      (r) => emit(MatchesSuccess(matchesList: r)),
-    );
+    final result = await _getLeagueMatchesUseCase.execute(leagueId: leagueId);
+    result.fold((l) => emit(MatchesFailure(errorMess: l.errMessage)), (r) {
+      pages.clear();
+      endNext = endPrevious = false;
+      index = 0;
+      pages.add(r);
+      if (r.gamesList.isEmpty) return emit(MatchesNotAvailable());
+      emit(MatchesSuccess(leagueMatchesEntity: r));
+    });
   }
 
-  Future<void> getPreviousLeagueMatches({required String pageUrl}) async {
+  Future<void> getPreviousLeagueMatches() async {
+    endNext = false;
+    if (state is NextMatchesFailure || state is NextMatchesLoading) {
+      return emit(MatchesSuccess(leagueMatchesEntity: pages[index]));
+    }
+    if (pages.isEmpty ||
+        pages[index].gamesList.isEmpty ||
+        endPrevious ||
+        state is PreviousMatchesLoading ||
+        state is PreviousMatchesFailure) {
+      return;
+    }
     emit(PreviousMatchesLoading());
-    var result = await getMoreLeagueMatchesUseCase.execute(pageUrl: pageUrl);
-    result.fold(
-      (l) => emit(MatchesFailure(errorMess: l.errMessage)),
-      (r) => emit(PreviousMatchesSuccess(matchesList: r)),
+    if (index > 0) {
+      return emit(MatchesSuccess(leagueMatchesEntity: pages[--index]));
+    }
+    final result = await _getMoreLeagueMatchesUseCase.execute(
+      pageUrl: pages[index].previousPage!,
     );
+    result.fold((l) => emit(PreviousMatchesFailure(errorMess: l.errMessage)), (
+      r,
+    ) {
+      if (r.previousPage == null) {
+        endPrevious = true;
+        return emit(MatchesSuccess(leagueMatchesEntity: pages[index]));
+      }
+      pages.insert(0, r);
+      index = 0;
+      emit(MatchesSuccess(leagueMatchesEntity: r));
+    });
   }
 
-  Future<void> getNextLeagueMatches({required String pageUrl}) async {
+  Future<void> getNextLeagueMatches() async {
+    endPrevious = false;
+    if (state is PreviousMatchesFailure || state is PreviousMatchesLoading) {
+      return emit(MatchesSuccess(leagueMatchesEntity: pages[index]));
+    }
+    if (pages.isEmpty ||
+        pages[index].gamesList.isEmpty ||
+        endNext ||
+        state is NextMatchesLoading ||
+        state is NextMatchesFailure) {
+      return;
+    }
     emit(NextMatchesLoading());
-    var result = await getMoreLeagueMatchesUseCase.execute(pageUrl: pageUrl);
-    result.fold(
-      (l) => emit(MatchesFailure(errorMess: l.errMessage)),
-      (r) => emit(NextMatchesSuccess(matchesList: r)),
+    if (index + 1 < pages.length) {
+      return emit(MatchesSuccess(leagueMatchesEntity: pages[++index]));
+    }
+    final result = await _getMoreLeagueMatchesUseCase.execute(
+      pageUrl: pages[index].nextPage!,
     );
+    result.fold((l) => emit(NextMatchesFailure(errorMess: l.errMessage)), (r) {
+      if (r.nextPage == null) {
+        endNext = true;
+        return emit(MatchesSuccess(leagueMatchesEntity: pages[index]));
+      }
+      pages.add(r);
+      index++;
+      emit(MatchesSuccess(leagueMatchesEntity: r));
+    });
   }
 }

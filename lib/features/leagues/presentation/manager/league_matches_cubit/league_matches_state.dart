@@ -11,25 +11,28 @@ final class MatchesInitial extends LeagueMatchesState {}
 
 final class MatchesLoading extends LeagueMatchesState {}
 
-final class MatchesSuccess extends LeagueMatchesState {
-  final LeagueMatchesEntity matchesList;
-  const MatchesSuccess({required this.matchesList});
-}
+final class PreviousMatchesLoading extends LeagueMatchesState {}
+
+final class NextMatchesLoading extends LeagueMatchesState {}
+
+final class MatchesNotAvailable extends LeagueMatchesState {}
 
 final class MatchesFailure extends LeagueMatchesState {
   final String errorMess;
   const MatchesFailure({required this.errorMess});
 }
 
-class NextMatchesLoading extends LeagueMatchesState {}
-class PreviousMatchesLoading extends LeagueMatchesState {}
-
-final class NextMatchesSuccess extends LeagueMatchesState {
-  final LeagueMatchesEntity matchesList;
-  const NextMatchesSuccess({required this.matchesList});
+final class PreviousMatchesFailure extends LeagueMatchesState {
+  final String errorMess;
+  const PreviousMatchesFailure({required this.errorMess});
 }
 
-final class PreviousMatchesSuccess extends LeagueMatchesState {
-  final LeagueMatchesEntity matchesList;
-  const PreviousMatchesSuccess({required this.matchesList});
+final class NextMatchesFailure extends LeagueMatchesState {
+  final String errorMess;
+  const NextMatchesFailure({required this.errorMess});
+}
+
+final class MatchesSuccess extends LeagueMatchesState {
+  final LeagueMatchesEntity leagueMatchesEntity;
+  const MatchesSuccess({required this.leagueMatchesEntity});
 }

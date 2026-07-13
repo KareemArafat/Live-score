@@ -15,7 +15,7 @@ class MatchesList extends StatelessWidget {
         shrinkWrap: true,
         itemCount: weekMatches.length,
         itemBuilder: (context, index) =>
-            MatchResultRow(match: weekMatches[index]),
+            MatchResultRow(matchEntity: weekMatches[index]),
       ),
     );
   }

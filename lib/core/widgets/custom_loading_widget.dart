@@ -11,7 +11,7 @@ class CustomLoadingWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: CircularProgressIndicator(
-        strokeAlign: size ?? context.r(10),
+        strokeAlign: size ?? context.rMin(6),
         strokeWidth: 2,
         backgroundColor: withSecColor
             ? AppColors.secColor1

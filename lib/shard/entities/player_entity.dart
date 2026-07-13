@@ -1,6 +1,4 @@
-import 'package:equatable/equatable.dart';
-
-class PlayerEntity extends Equatable {
+class PlayerEntity {
   final int playerId;
   final String playerName;
   final String playerImage;
@@ -30,21 +28,4 @@ class PlayerEntity extends Equatable {
     this.countryName,
     this.countryImage,
   });
-
-  @override
-  List<Object?> get props => [
-    playerId,
-    playerName,
-    playerImage,
-    playerNum,
-    teamId,
-    teamName,
-    teamImage,
-    leagueId,
-    leagueName,
-    leagueImage,
-    countryId,
-    countryName,
-    countryImage,
-  ];
 }

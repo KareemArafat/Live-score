@@ -10,8 +10,8 @@ extension SizeHelperExtensions on BuildContext {
   double get screenWidth => MediaQuery.of(this).size.width;
 
   SizeProvider get sizeProvider => SizeProvider.of(this);
-  double get scaleHeight => sizeProvider.height / sizeProvider.baseSize.height;
-  double get scaleWidth => sizeProvider.width / sizeProvider.baseSize.width;
+  double get scaleHeight => screenHeight / sizeProvider.baseSize.height;
+  double get scaleWidth => screenWidth / sizeProvider.baseSize.width;
 
   double h(num height) => height * scaleHeight;
 
@@ -20,7 +20,7 @@ extension SizeHelperExtensions on BuildContext {
   double sp(num fontSize) =>
       isLandscape ? (fontSize * scaleWidth * 0.6) : (fontSize * scaleWidth);
 
-  double r(num size) => isLandscape
+  double rMin(num size) => isLandscape
       ? size * min(scaleHeight, scaleWidth) * 2
       : size * min(scaleHeight, scaleWidth);
 

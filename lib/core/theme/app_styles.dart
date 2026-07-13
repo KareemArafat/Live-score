@@ -18,6 +18,12 @@ abstract class AppStyles {
   }
 
   // 🔹 Headings
+  static TextStyle heading22(BuildContext context) =>
+      _style(context, size: 22, color: Colors.white, weight: FontWeight.w900);
+
+  static TextStyle heading20(BuildContext context) =>
+      _style(context, size: 20, color: Colors.white, weight: FontWeight.w900);
+
   static TextStyle heading18(BuildContext context) =>
       _style(context, size: 18, color: Colors.white, weight: FontWeight.w500);
 
@@ -34,8 +40,8 @@ abstract class AppStyles {
   static TextStyle body10(BuildContext context) =>
       _style(context, size: 10, color: Colors.white);
 
-  static TextStyle body9(BuildContext context) =>
-      _style(context, size: 9, color: AppColors.grayColor);
+  static TextStyle body8(BuildContext context) =>
+      _style(context, size: 8, color: Colors.white);
 
   // 🔹 Variants
   static TextStyle blockBody12(BuildContext context) =>
@@ -49,4 +55,7 @@ abstract class AppStyles {
 
   static TextStyle grayBody10(BuildContext context) =>
       _style(context, size: 10, color: AppColors.grayColor);
+
+  static TextStyle grayBody9(BuildContext context) =>
+      _style(context, size: 9, color: AppColors.grayColor);
 }

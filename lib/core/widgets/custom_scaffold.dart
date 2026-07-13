@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:live_score_app/core/responsive_helpers/size_helper_extensions.dart';
 import 'package:live_score_app/core/theme/app_images.dart';
 
 class CustomScaffold extends StatelessWidget {
@@ -28,7 +29,12 @@ class CustomScaffold extends StatelessWidget {
         bottomNavigationBar: bottomNavigationBar,
         appBar: appBar,
         drawer: drawer,
-        body: SafeArea(child: body),
+        body: SafeArea(
+          child: Padding(
+            padding: EdgeInsets.only(top: context.isLandscape ? 8 : 0),
+            child: body,
+          ),
+        ),
       ),
     );
   }

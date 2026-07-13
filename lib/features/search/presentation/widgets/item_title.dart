@@ -13,9 +13,11 @@ class ItemTitle extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: CustomGradientWidget(
         linearGradient: AppColors.greenGradient,
-        widget: Text(
+        child: Text(
           title,
-          style: AppStyles.heading16(context).copyWith(fontWeight: FontWeight.bold),
+          style: AppStyles.heading16(
+            context,
+          ).copyWith(fontWeight: FontWeight.bold),
         ),
       ),
     );

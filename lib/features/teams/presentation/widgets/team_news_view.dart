@@ -29,7 +29,8 @@ class _TeamNewsViewState extends State<TeamNewsView>
           return ListView.builder(
             padding: EdgeInsets.symmetric(horizontal: 25),
             itemCount: news.length,
-            itemBuilder: (context, index) => NewsListItem(news: news[index]),
+            itemBuilder: (context, index) =>
+                NewsListItem(newsEntity: news[index]),
           );
         } else if (state is TeamNewsFailure) {
           return Center(child: Text(state.errMess));

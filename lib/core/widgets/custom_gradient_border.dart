@@ -48,7 +48,7 @@ class GradientBorderPainter extends CustomPainter {
       ..strokeWidth = 2;
 
     final rrect = RRect.fromRectAndRadius(
-      rect.deflate(1), // deflate half of strokeWidth
+      rect.deflate(1),
       Radius.circular(border),
     );
 

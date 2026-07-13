@@ -10,25 +10,31 @@ class TeamEntity extends HiveObject {
   @HiveField(2)
   final String teamImage;
   @HiveField(3)
-  final int? countryId;
+  final bool isNational;
   @HiveField(4)
-  final String? countryName;
+  final int nationalRank;
   @HiveField(5)
-  final String? countryImage;
+  final int countryId;
   @HiveField(6)
-  final int? leagueId;
+  final String countryName;
   @HiveField(7)
-  final String? leagueName;
+  final String countryImage;
   @HiveField(8)
+  final int? leagueId;
+  @HiveField(9)
+  final String? leagueName;
+  @HiveField(10)
   final String? leagueImage;
 
   TeamEntity({
     required this.teamId,
     required this.teamName,
     required this.teamImage,
-    this.countryId,
-    this.countryName,
-    this.countryImage,
+    required this.isNational,
+    required this.nationalRank,
+    required this.countryId,
+    required this.countryName,
+    required this.countryImage,
     this.leagueId,
     this.leagueName,
     this.leagueImage,

@@ -1,7 +1,8 @@
+import 'package:live_score_app/shard/models/league_model.dart';
 import 'package:live_score_app/features/search/data/models/search_athlete.dart';
-import 'package:live_score_app/features/search/data/models/search_competition.dart';
-import 'package:live_score_app/features/search/data/models/search_competitor.dart';
+
 import 'package:live_score_app/features/search/domain/entities/search_result_entity.dart';
+import 'package:live_score_app/shard/models/team_model.dart';
 
 class SearchResultModel extends SearchResultEntity {
   const SearchResultModel({
@@ -13,21 +14,21 @@ class SearchResultModel extends SearchResultEntity {
          teamEntity: competitors,
          playerEntity: athletes,
        );
-  final List<SearchCompetition> competitions;
-  final List<SearchCompetitor> competitors;
+  final List<LeagueModel> competitions;
+  final List<TeamModel> competitors;
   final List<SearchAthlete> athletes;
 
   factory SearchResultModel.fromJson(Map<String, dynamic> json) {
     return SearchResultModel(
       competitions: json["competitions"] == null
           ? []
-          : List<SearchCompetition>.from(
-              json["competitions"]!.map((x) => SearchCompetition.fromJson(x)),
+          : List<LeagueModel>.from(
+              json["competitions"]!.map((x) => LeagueModel.fromJson(x)),
             ),
       competitors: json["competitors"] == null
           ? []
-          : List<SearchCompetitor>.from(
-              json["competitors"]!.map((x) => SearchCompetitor.fromJson(x)),
+          : List<TeamModel>.from(
+              json["competitors"]!.map((x) => TeamModel.fromJson(x)),
             ),
       athletes: json["athletes"] == null
           ? []

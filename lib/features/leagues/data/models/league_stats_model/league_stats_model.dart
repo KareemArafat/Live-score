@@ -1,11 +1,11 @@
 import 'package:live_score_app/core/api/api_const.dart';
-import 'package:live_score_app/features/leagues/data/models/league_stats_model/competitors.dart';
 import 'package:live_score_app/features/leagues/data/models/league_stats_model/players_stats.dart';
-import 'package:live_score_app/features/leagues/domain/entities/league_stats_entity.dart';
+import 'package:live_score_app/features/leagues/domain/entities/league_stats_entity/league_stats_entity.dart';
+import 'package:live_score_app/shard/models/team_model.dart';
 
 class LeagueStatsModel {
   final PlayersStats? playersStats;
-  final List<Competitors>? competitors;
+  final List<TeamModel>? competitors;
 
   LeagueStatsModel({required this.playersStats, required this.competitors});
 
@@ -16,8 +16,8 @@ class LeagueStatsModel {
             : PlayersStats.fromJson(json['stats']),
         competitors: json["competitors"] == null
             ? []
-            : List<Competitors>.from(
-                json["competitors"].map((x) => Competitors.fromJson(x)),
+            : List<TeamModel>.from(
+                json["competitors"].map((x) => TeamModel.fromJson(x)),
               ),
       );
 

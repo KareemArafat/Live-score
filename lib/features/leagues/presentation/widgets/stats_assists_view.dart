@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:live_score_app/core/responsive_helpers/size_helper_extensions.dart';
+import 'package:live_score_app/core/widgets/custom_error_widget.dart';
 import 'package:live_score_app/features/leagues/presentation/manager/League_players_stats_cubit/league_players_stats_cubit.dart';
 import 'package:live_score_app/features/leagues/presentation/widgets/stats_assists_details_bar.dart';
 import 'package:live_score_app/features/leagues/presentation/widgets/stats_assists_item.dart';
 import 'package:live_score_app/core/widgets/custom_loading_widget.dart';
 
 class StatsAssistsView extends StatelessWidget {
-  const StatsAssistsView({super.key});
+  const StatsAssistsView({super.key, required this.leagueId});
+  final int leagueId;
 
   @override
   Widget build(BuildContext context) {
@@ -15,12 +18,14 @@ class StatsAssistsView extends StatelessWidget {
         if (state is StatsSuccess) {
           final topAssistsList = state.playersStats.assists;
           return ListView.builder(
-            padding: EdgeInsets.only(left: 12, right: 12, top: 12),
+            padding: EdgeInsets.only(
+              left: context.w(12),
+              right: context.w(12),
+              top: context.h(12),
+            ),
             itemCount: topAssistsList.length + 1,
             itemBuilder: (context, index) {
-              if (index == 0) {
-                return StatsAssistsDetailsBar();
-              }
+              if (index == 0) return StatsAssistsDetailsBar();
               return StatsAssistsItem(
                 player: topAssistsList[index - 1],
                 rank: index,
@@ -28,7 +33,12 @@ class StatsAssistsView extends StatelessWidget {
             },
           );
         } else if (state is StatsFailure) {
-          return Center(child: Text(state.errorMess));
+          return CustomErrorWidget(
+            errorMess: state.errorMess,
+            onPressed: () => context
+                .read<LeaguePlayersStatsCubit>()
+                .getLeaguePlayersStats(leagueId: leagueId),
+          );
         } else {
           return CustomLoadingWidget();
         }

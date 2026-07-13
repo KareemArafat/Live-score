@@ -1,7 +1,7 @@
 import 'package:live_score_app/shard/entities/table_entity.dart';
-import 'package:live_score_app/shard/models/competitor_model.dart';
+import 'package:live_score_app/shard/models/team_model.dart';
 
-class Row extends RowEntity {
+class Row extends TableRowEntity {
   Row({
     required this.competitor,
     required this.gamePlayed,
@@ -27,7 +27,7 @@ class Row extends RowEntity {
     required this.ppg,
     required this.oppg,
   }) : super(
-         team: competitor,
+         team: competitor!,
          teamRank: position ?? 0,
          matchesNum: gamePlayed ?? 0,
          wins: gamesWon ?? 0,
@@ -39,7 +39,7 @@ class Row extends RowEntity {
          totalPoints: points?.toInt() ?? 0,
        );
 
-  final CompetitorModel? competitor;
+  final TeamModel? competitor;
   final int? gamePlayed;
   final int? gamesWon;
   final int? gamesLost;
@@ -67,7 +67,7 @@ class Row extends RowEntity {
     return Row(
       competitor: json["competitor"] == null
           ? null
-          : CompetitorModel.fromJson(json["competitor"]),
+          : TeamModel.fromJson(json["competitor"]),
       gamePlayed: json["gamePlayed"],
       gamesWon: json["gamesWon"],
       gamesLost: json["gamesLost"],

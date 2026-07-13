@@ -1,17 +1,19 @@
 import 'package:go_router/go_router.dart';
+import 'package:live_score_app/features/onboarding/presentation/views/onboarding_page.dart';
 import 'package:live_score_app/features/profile/presentation/views/create_user_page.dart';
-import 'package:live_score_app/features/slider%20menu/presentation/views/contact_us_page.dart';
+import 'package:live_score_app/features/slider_menu/presentation/views/contact_us_page.dart';
 import 'package:live_score_app/shard/entities/match_entity.dart';
 import 'package:live_score_app/shard/entities/team_entity.dart';
 import 'package:live_score_app/shard/widgets/page_navigation_bar.dart';
 import 'package:live_score_app/shard/entities/league_entity.dart';
-import 'package:live_score_app/features/day%20matches/presentation/views/day_matches_page.dart';
+import 'package:live_score_app/features/day_matches/presentation/views/day_matches_page.dart';
 import 'package:live_score_app/features/leagues/presentation/views/league_details_page.dart';
 import 'package:live_score_app/features/leagues/presentation/views/all_leagues_page.dart';
 import 'package:live_score_app/features/matches/presentation/views/match_page.dart';
 import 'package:live_score_app/features/teams/presentation/views/team_page.dart';
 
 abstract class AppRouters {
+  static const onBoardingPage = '/onBoardingPage';
   static const createUserPage = '/createUserPage';
   static const homePage = '/homePage';
   static const dayMatchesPage = '/dayMatchesPage';
@@ -22,8 +24,12 @@ abstract class AppRouters {
   static const contactUsPage = '/contactUsPage';
 
   static GoRouter router(bool isSeen) => GoRouter(
-    initialLocation: isSeen ? homePage : createUserPage,
+    initialLocation: isSeen ? homePage : onBoardingPage,
     routes: <RouteBase>[
+      GoRoute(
+        path: onBoardingPage,
+        builder: (context, state) => OnboardingPage(),
+      ),
       GoRoute(
         path: createUserPage,
         builder: (context, state) => CreateUserPage(),
@@ -37,7 +43,7 @@ abstract class AppRouters {
       GoRoute(
         path: leagueDetailsPage,
         builder: (context, state) =>
-            LeagueDetailsPage(league: state.extra as LeagueEntity),
+            LeagueDetailsPage(leagueEntity: state.extra as LeagueEntity),
       ),
       GoRoute(
         path: matchPage,
